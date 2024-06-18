@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://dj7e3sgy45cnr"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_s47qk"]
+[ext_resource type="PackedScene" uid="uid://cwlems7q0tb0n" path="res://democratic_emitter.tscn" id="2_ju661"]
+
+[sub_resource type="Curve" id="Curve_hwrp5"]
+_data = [Vector2(0, 0), 0.0, 1.57444, 0, 1, Vector2(0.173913, 0.273816), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gqcvt"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.348842, 0.482403, 1, 1)
+emission_enabled = true
+emission = Color(0.348842, 0.482403, 1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_h2m18"]
+material = SubResource("StandardMaterial3D_gqcvt")
+curve = SubResource("Curve_hwrp5")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fqdy"]
+bg_color = Color(0, 0, 0, 0.414)
+
+[sub_resource type="Environment" id="Environment_1is1e"]
+glow_enabled = true
+glow_blend_mode = 1
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_s47qk")
+
+[node name="DemocraticEmitterLeft" parent="." instance=ExtResource("2_ju661")]
+
+[node name="DemocraticEmitterRight" parent="." instance=ExtResource("2_ju661")]
+draw_pass_1 = SubResource("TubeTrailMesh_h2m18")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 9, 12)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusLabel" type="Label" parent="Control"]
+layout_mode = 1
+offset_right = 132.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_3fqdy")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1is1e")

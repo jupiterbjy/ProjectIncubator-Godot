@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwlems7q0tb0n"]
+
+[ext_resource type="Script" path="res://democratic_emitter.gd" id="1_m4yp5"]
+
+[sub_resource type="Curve" id="Curve_6maas"]
+_data = [Vector2(0, 1), 0.0, -0.0188166, 0, 1, Vector2(1, 0), -3.36213, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bca68"]
+curve = SubResource("Curve_6maas")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sd51u"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, -1, 0)
+scale_curve = SubResource("CurveTexture_bca68")
+
+[sub_resource type="Curve" id="Curve_wm0jr"]
+_data = [Vector2(0, 0), 0.0, 1.57444, 0, 1, Vector2(0.173913, 0.273816), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aw83u"]
+transparency = 1
+albedo_color = Color(1, 0.6, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.6, 0, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_rdhkd"]
+material = SubResource("StandardMaterial3D_aw83u")
+curve = SubResource("Curve_wm0jr")
+
+[node name="DemocraticEmitter" type="GPUParticles3D"]
+emitting = false
+amount = 4096
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_sd51u")
+draw_pass_1 = SubResource("TubeTrailMesh_rdhkd")
+script = ExtResource("1_m4yp5")
