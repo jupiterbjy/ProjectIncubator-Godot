@@ -2,7 +2,7 @@
 
 Or just, unity-like emitter demo.
 
-![](_shocase.webp)
+![](showcase.webp)
 
 It's just (in single frame's perspective) groupped call on `GPUParticles3D.emit_particle`.
 
