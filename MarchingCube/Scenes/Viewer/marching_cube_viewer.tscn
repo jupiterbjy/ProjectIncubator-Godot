@@ -1,0 +1,287 @@
+[gd_scene load_steps=13 format=3 uid="uid://bemv6r4vo28e5"]
+
+[ext_resource type="Script" path="res://Scenes/Viewer/marching_cube_viewer.gd" id="1_twy6k"]
+[ext_resource type="Script" path="res://Scenes/Viewer/fps.gd" id="2_3ro0u"]
+[ext_resource type="PackedScene" uid="uid://des2n00ov1bh7" path="res://Scenes/Camera/orbit_cam.tscn" id="2_kjpu5"]
+[ext_resource type="PackedScene" uid="uid://ch4idvk0b0b5o" path="res://Scenes/MarchingCube/marching_cube.tscn" id="4_nkebo"]
+[ext_resource type="ArrayMesh" uid="uid://c4sm30g8dvtov" path="res://Scenes/Viewer/cube_basic.mesh" id="6_0y3t7"]
+[ext_resource type="Script" path="res://Scenes/Viewer/ui_spin_box.gd" id="6_k8k2w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83sx4"]
+cull_mode = 2
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jmjx"]
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(93.526, 100, 100, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 32.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_t4vs8"]
+material = SubResource("StandardMaterial3D_6jmjx")
+radius = 0.01
+height = 0.02
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wjyl"]
+
+[sub_resource type="Sky" id="Sky_pxuae"]
+sky_material = SubResource("ProceduralSkyMaterial_6wjyl")
+
+[sub_resource type="Environment" id="Environment_imvmu"]
+sky = SubResource("Sky_pxuae")
+reflected_light_source = 1
+tonemap_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
+[node name="MarchingCubeViewer" type="Node3D"]
+script = ExtResource("1_twy6k")
+
+[node name="MarchingCube" parent="." instance=ExtResource("4_nkebo")]
+
+[node name="BoxBoundary" type="MeshInstance3D" parent="MarchingCube"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("6_0y3t7")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_83sx4")
+
+[node name="TurntableCam" type="Node3D" parent="."]
+
+[node name="OrbitCam" parent="TurntableCam" instance=ExtResource("2_kjpu5")]
+
+[node name="TurntableLight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="PointLightMesh" type="MeshInstance3D" parent="TurntableLight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = SubResource("SphereMesh_t4vs8")
+skeleton = NodePath("../OmniLight3D")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="TurntableLight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+shadow_enabled = true
+shadow_reverse_cull_face = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_imvmu")
+
+[node name="UI" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="FullScreen" type="Control" parent="UI"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/FullScreen"]
+layout_mode = 1
+offset_right = 300.0
+offset_bottom = 74.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="FPS" type="Label" parent="UI/FullScreen/Stats"]
+layout_mode = 2
+text = "FPS:"
+script = ExtResource("2_3ro0u")
+
+[node name="PosLabel" type="Label" parent="UI/FullScreen/Stats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Pos:"
+
+[node name="BottomControls" type="HBoxContainer" parent="UI/FullScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -354.0
+offset_top = -46.0
+offset_right = 354.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PauseButton" type="Button" parent="UI/FullScreen/BottomControls"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+toggle_mode = true
+keep_pressed_outside = true
+text = " Pause Movement "
+icon_alignment = 1
+
+[node name="VertShowButton" type="Button" parent="UI/FullScreen/BottomControls"]
+layout_mode = 2
+size_flags_vertical = 4
+toggle_mode = true
+keep_pressed_outside = true
+text = " Show Verts "
+icon_alignment = 1
+
+[node name="FlatShadeButton" type="Button" parent="UI/FullScreen/BottomControls"]
+layout_mode = 2
+size_flags_vertical = 4
+toggle_mode = true
+keep_pressed_outside = true
+text = " Flat Shade "
+icon_alignment = 1
+
+[node name="RotationButton" type="Button" parent="UI/FullScreen/BottomControls"]
+layout_mode = 2
+size_flags_vertical = 4
+toggle_mode = true
+button_pressed = true
+keep_pressed_outside = true
+text = " Rotation "
+icon_alignment = 1
+
+[node name="SideControls" type="VBoxContainer" parent="UI/FullScreen"]
+custom_minimum_size = Vector2(410, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -216.0
+offset_right = 410.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/FullScreen/SideControls"]
+layout_mode = 2
+
+[node name="WSpinBox" type="SpinBox" parent="UI/FullScreen/SideControls/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+min_value = 4.0
+value = 10.0
+rounded = true
+alignment = 3
+prefix = "Width"
+custom_arrow_step = 1.0
+script = ExtResource("6_k8k2w")
+
+[node name="ThresholdSpinBox" type="SpinBox" parent="UI/FullScreen/SideControls/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.1
+alignment = 3
+prefix = "Threshold"
+custom_arrow_step = 0.1
+script = ExtResource("6_k8k2w")
+
+[node name="SmoothnessSpinBox" type="SpinBox" parent="UI/FullScreen/SideControls/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.1
+value = 1.0
+alignment = 3
+prefix = "Smoothness"
+custom_arrow_step = 0.1
+script = ExtResource("6_k8k2w")
+
+[node name="BlendingSpinBox" type="SpinBox" parent="UI/FullScreen/SideControls/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+max_value = 10.0
+step = 0.2
+value = 1.0
+alignment = 3
+prefix = "TextureBlend"
+custom_arrow_step = 0.2
+script = ExtResource("6_k8k2w")
+
+[node name="VBoxContainer" type="HBoxContainer" parent="UI/FullScreen/SideControls"]
+layout_mode = 2
+
+[node name="SeedLabel" type="LineEdit" parent="UI/FullScreen/SideControls/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+placeholder_text = "Seed"
+expand_to_text_length = true
+
+[node name="RandomizeButton" type="Button" parent="UI/FullScreen/SideControls/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+keep_pressed_outside = true
+text = " Randomize "
+icon_alignment = 1
+
+[node name="ControlMapping" type="HBoxContainer" parent="UI/FullScreen"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -277.0
+offset_right = -5.0
+offset_bottom = 112.0
+grow_horizontal = 0
+theme_override_constants/separation = 20
+
+[node name="Input" type="Label" parent="UI/FullScreen/ControlMapping"]
+layout_mode = 2
+text = "LMB+Drag
+RMB
+Scroll"
+horizontal_alignment = 2
+
+[node name="Action" type="Label" parent="UI/FullScreen/ControlMapping"]
+layout_mode = 2
+text = "Rotate cam
+Reset cam
+Zoom"
+
+[connection signal="toggled" from="UI/FullScreen/BottomControls/PauseButton" to="." method="_on_pause_button_toggled"]
+[connection signal="toggled" from="UI/FullScreen/BottomControls/VertShowButton" to="." method="_on_vert_show_button_toggled"]
+[connection signal="toggled" from="UI/FullScreen/BottomControls/FlatShadeButton" to="." method="_on_flat_shade_button_toggled"]
+[connection signal="toggled" from="UI/FullScreen/BottomControls/RotationButton" to="." method="_on_rotation_button_toggled"]
+[connection signal="mouse_entered" from="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" method="_on_mouse_exited"]
+[connection signal="value_changed" from="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" to="." method="_on_w_spin_box_value_changed"]
+[connection signal="mouse_entered" from="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" method="_on_mouse_exited"]
+[connection signal="value_changed" from="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" to="." method="_on_threshold_spin_box_value_changed"]
+[connection signal="mouse_entered" from="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" method="_on_mouse_exited"]
+[connection signal="value_changed" from="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" to="." method="_on_smoothness_spin_box_value_changed"]
+[connection signal="mouse_entered" from="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" method="_on_mouse_exited"]
+[connection signal="value_changed" from="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" to="." method="_on_blending_spin_box_value_changed"]
+[connection signal="text_submitted" from="UI/FullScreen/SideControls/VBoxContainer/SeedLabel" to="." method="_on_seed_label_text_submitted"]
+[connection signal="pressed" from="UI/FullScreen/SideControls/VBoxContainer/RandomizeButton" to="." method="_on_randomize_button_pressed"]

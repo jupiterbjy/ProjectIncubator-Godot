@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://ch4idvk0b0b5o"]
+
+[ext_resource type="Script" path="res://Scenes/MarchingCube/marching_cube.gd" id="1_wl5se"]
+[ext_resource type="PackedScene" uid="uid://c6xkcpxeyn5fk" path="res://Scenes/MarchingCube/VertMarker/vert_marker.tscn" id="2_c3d21"]
+[ext_resource type="Material" uid="uid://c2dr3s2dkiwwt" path="res://Scenes/MarchingCube/Shader/triplanar_uv_mat.tres" id="3_bmlxl"]
+[ext_resource type="Shader" path="res://Scenes/Viewer/wireframe.gdshader" id="3_h8iuj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sd38l"]
+noise_type = 0
+frequency = 0.02
+fractal_type = 0
+domain_warp_amplitude = 12.31
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wuk6f"]
+render_priority = 0
+shader = ExtResource("3_h8iuj")
+shader_parameter/albedo = Color(1, 0, 0, 0.235294)
+shader_parameter/displacement = 3.0
+
+[node name="MarchingCube" type="Node3D"]
+script = ExtResource("1_wl5se")
+noise = SubResource("FastNoiseLite_sd38l")
+vert_marker = ExtResource("2_c3d21")
+
+[node name="Offset" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.5)
+
+[node name="MeshInstance" type="MeshInstance3D" parent="Offset"]
+material_override = ExtResource("3_bmlxl")
+material_overlay = SubResource("ShaderMaterial_wuk6f")
+skeleton = NodePath("../StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Offset"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Offset/StaticBody3D"]
+
+[node name="MarkerRoot" type="Node3D" parent="Offset"]
+visible = false
