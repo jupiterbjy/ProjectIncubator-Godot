@@ -10,6 +10,8 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83sx4"]
 cull_mode = 2
 shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jmjx"]
 disable_ambient_light = true
@@ -43,6 +45,8 @@ script = ExtResource("1_twy6k")
 
 [node name="BoxBoundary" type="MeshInstance3D" parent="MarchingCube"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+layers = 2
+cast_shadow = 0
 mesh = ExtResource("6_0y3t7")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_83sx4")
@@ -117,35 +121,31 @@ size_flags_vertical = 8
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="PauseButton" type="Button" parent="UI/FullScreen/BottomControls"]
+[node name="PauseButton" type="CheckBox" parent="UI/FullScreen/BottomControls"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
-toggle_mode = true
 keep_pressed_outside = true
 text = " Pause Movement "
 icon_alignment = 1
 
-[node name="VertShowButton" type="Button" parent="UI/FullScreen/BottomControls"]
+[node name="VertShowButton" type="CheckBox" parent="UI/FullScreen/BottomControls"]
 layout_mode = 2
 size_flags_vertical = 4
-toggle_mode = true
 keep_pressed_outside = true
 text = " Show Verts "
 icon_alignment = 1
 
-[node name="FlatShadeButton" type="Button" parent="UI/FullScreen/BottomControls"]
+[node name="FlatShadeButton" type="CheckBox" parent="UI/FullScreen/BottomControls"]
 layout_mode = 2
 size_flags_vertical = 4
-toggle_mode = true
 keep_pressed_outside = true
 text = " Flat Shade "
 icon_alignment = 1
 
-[node name="RotationButton" type="Button" parent="UI/FullScreen/BottomControls"]
+[node name="RotationButton" type="CheckBox" parent="UI/FullScreen/BottomControls"]
 layout_mode = 2
 size_flags_vertical = 4
-toggle_mode = true
 button_pressed = true
 keep_pressed_outside = true
 text = " Rotation "
