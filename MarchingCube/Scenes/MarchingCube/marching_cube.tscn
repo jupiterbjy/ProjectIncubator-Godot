@@ -20,14 +20,8 @@ shader_parameter/displacement = 3.0
 
 [node name="MarchingCube" type="Node3D"]
 script = ExtResource("1_wl5se")
-width = null
-chunk_pos = null
 noise = SubResource("FastNoiseLite_sd38l")
-threshold = null
-smoothness = null
 vert_marker = ExtResource("2_c3d21")
-flat_shading = null
-density_type = null
 
 [node name="Offset" type="Node3D" parent="."]
 

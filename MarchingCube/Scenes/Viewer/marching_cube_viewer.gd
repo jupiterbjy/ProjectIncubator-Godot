@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 
 	if not _pause:
 		# change pos and update
-		self._chunk_pos += Vector3(delta * 0.02, 0.0, 0.0)
+		self._chunk_pos += Vector3(delta * 0.2, 0.0, 0.0)
 		self.marching_cube.set_chunk_pos(self._chunk_pos)
 		self.pos_label.text = "Pos %.2v" % self._chunk_pos
 
@@ -29,13 +29,25 @@ func _process(delta: float) -> void:
 		# rotate cam and light.
 		# originally cube was turning one, but to prevent global->local normal calculation in
 		# shader I instead put camera in turntable instead. Relativity, son!
-		self.turntable_cam.rotate_y(delta * _rotation_speed)
+		self.turntable_cam.rotate_y(delta * 0.5 * _rotation_speed)
 		self.turntable_light.rotate_y(-delta * 1.5 * _rotation_speed)
 
 
 # --- Driver ---
 
 func _ready() -> void:
+	# populate option button
+	var option_btn: OptionButton = %OptionButton
+	option_btn.clear()
+	
+	for _name in self.marching_cube.density_func.FUNC_TYPE:
+		option_btn.add_item(_name)
+	
+	# set initial density option & noise frequency selection just in case
+	self.marching_cube.density_type = option_btn.selected
+	self.marching_cube.density_func.set_noise_frequency(%FreqSpinBox.value)
+	
+	# init cube
 	self.marching_cube.regenerate_all()
 
 
@@ -54,6 +66,7 @@ func _on_randomize_button_pressed() -> void:
 	%SeedLabel.text = str(val)
 
 	self.marching_cube.set_seed(val)
+	self.marching_cube.regenerate_mesh()
 
 
 func _on_pause_button_toggled(toggled_on: bool) -> void:
@@ -81,3 +94,12 @@ func _on_rotation_button_toggled(toggled_on: bool) -> void:
 
 func _on_blending_spin_box_value_changed(value: float) -> void:
 	self.marching_cube.set_blending_factor(value)
+
+
+func _on_option_button_item_selected(index: int) -> void:
+	self.marching_cube.density_type = index
+	self.marching_cube.regenerate_mesh()
+
+
+func _on_freq_spin_box_value_changed(value: float) -> void:
+	self.marching_cube.density_func.set_noise_frequency(value)

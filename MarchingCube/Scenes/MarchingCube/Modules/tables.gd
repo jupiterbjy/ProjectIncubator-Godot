@@ -18,7 +18,7 @@ const VERT_OFFSET_TABLE: Array[Vector3i] = [
 
 ## Get vert at given index relative to 0th vert position
 func vert_idx_to_pos(zero_vert: Vector3i, idx: int) -> Vector3i:
-	return zero_vert + self._VERT_OFFSET_TABLE[idx]
+	return zero_vert + self.VERT_OFFSET_TABLE[idx]
 
 
 ## Edge's vert a, b index in cube

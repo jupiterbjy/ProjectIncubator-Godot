@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://u45tlsx6l2fi"]
+[gd_scene load_steps=3 format=3 uid="uid://u45tlsx6l2fi"]
 
 [ext_resource type="Script" path="res://Scenes/MarchingCube/Modules/density_funcs.gd" id="1_8gpfd"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7ktra"]
+fractal_type = 0
+domain_warp_amplitude = 15.0
+domain_warp_fractal_octaves = 1
+domain_warp_fractal_lacunarity = 1.0
+domain_warp_fractal_gain = 0.1
+
 [node name="DensityFuncs" type="Node"]
 script = ExtResource("1_8gpfd")
+noise = SubResource("FastNoiseLite_7ktra")

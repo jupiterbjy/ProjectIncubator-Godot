@@ -10,50 +10,73 @@ static var _NOISE_OFFSET: Vector3 = Vector3(0, 0, -10000)
 ## Multiplier to noise in case step is too small.
 static var _NOISE_MULTIPLIER: float = 50.0
 
-## Density function types
-enum FUNC_TYPE {NOISE_3D, NOISE_2D, SPHERE}
 
-@export var func_type: FUNC_TYPE
+# --- Noise ---
 
-## 3D Noise
-@export var noise_3d: NoiseTexture3D
+@export var noise: FastNoiseLite
 
-## 2D Noise
-@export var noise_2d: NoiseTexture2D
+## Set noise scale
+func set_noise_frequency(new_freq: float) -> void:
+	self.noise.frequency = new_freq
 
-## Sphere Radius
-@export var radius: float = 0.2
+
+## Set noise offset
+func set_noise_offset(new_offset: Vector3) -> void:
+	self.noise.offset = new_offset
+
+
+## Set noise seed
+func set_noise_seed(new_seed: int) -> void:
+	self.noise.seed = new_seed
 
 
 # --- Funcs ---
 
-## Density function with Sphere shape with center at 0, 0, 0.
-func sample_sphere_density(pos: Vector3) -> float:
-	var _density: float = pos.distance_squared_to(Vector3.ZERO) - self.radius
+## Sphere Radius
+@export var radius: float = 0.2
+
+## Density function with 3D Noise. Creates Tunnels.
+func sample_3d_density(pos: Vector3, offset_pos: Vector3) -> float:
+	var _density: float = self.noise.get_noise_3dv(pos + offset_pos)
 	return _density
 
 
 ## Density function with 3D Noise. Creates Tunnels.
-func sample_3d_density(pos: Vector3) -> float:
-	var _density: float = self.noise_3d.get_noise_3dv(pos)
-	return _density
+func sample_3d_inverted_density(pos: Vector3, offset_pos: Vector3) -> float:
+	return -sample_3d_density(pos, offset_pos)
 
 
 ## Density function with 2D Noise. Creates 2D map.
-func sample_2d_density(pos: Vector3) -> float:
+func sample_2d_density(pos: Vector3, offset_pos: Vector3) -> float:
 	# since y val sign change at y=0, this creates plane.
 	var _density: float = pos.y
 	
-	# add noise
-	_density += self.noise_2d.get_noise_2d(pos.x, pos.z);
+	var height_weight: float = (1.0 - abs(pos.y * 2))
 	
+	# add noise
+	var noise_val = self.noise.get_noise_2d(pos.x + offset_pos.x, pos.z + offset_pos.z) * 0.5;
+	
+	return _density + noise_val * height_weight
+
+
+## Density function with Sphere shape with center at 0, 0, 0.
+func sample_sphere_density(pos: Vector3, _offset_pos: Vector3) -> float:
+	var _density: float = pos.distance_squared_to(Vector3.ZERO) - self.radius
 	return _density
 
 
-static var _FUNCS: Array[Callable] = [
-	Callable(self, "sample_")
+
+## Density function types
+enum FUNC_TYPE {NOISE_3D, NOISE_3D_INV, NOISE_2D, SPHERE}
+
+var _FUNCS: Array[Callable] = [
+	Callable(self, "sample_3d_density"),
+	Callable(self, "sample_3d_inverted_density"),
+	Callable(self, "sample_2d_density"),
+	Callable(self, "sample_sphere_density"),
 ]
 
 ## Return noise in range of -1.0~1.0 with designated func_type.
-func sample_density(pos: Vector3) -> float:
-	
+## Expects position of -0.5~0.5 range, no restriction for offset_pos.
+func sample_density(pos: Vector3, offset_pos: Vector3, type: FUNC_TYPE) -> float:
+	return self._FUNCS[type].call(pos, offset_pos)

@@ -2,7 +2,11 @@ class_name MarchingCube extends Node3D
 ## Godot marching cube implementation for Cube.
 ## Multithreading is not implemented.
 
-const _tables: Tables = preload("res://Scenes/MarchingCube/tables.gd")
+
+static var tables: Tables = preload("res://Scenes/MarchingCube/Modules/tables.tscn").instantiate()
+static var density_func: DensityFuncs = preload(
+	"res://Scenes/MarchingCube/Modules/density_funcs.tscn"
+).instantiate()
 
 
 @export_group("Generation")
@@ -31,7 +35,7 @@ const _tables: Tables = preload("res://Scenes/MarchingCube/tables.gd")
 ## Decide whether to apply flat shading or not
 @export var flat_shading: bool = false
 
-@export_enum("3D", "2D", "Sphere") var density_type: int
+@export_enum("3D", "3D Inverted", "2D", "Sphere") var density_type: int
 
 
 # --- ready ---
@@ -107,7 +111,7 @@ func _get_cube_idx(vert_zero: Vector3i) -> int:
 	for idx: int in range(8):
 
 		# mark current edge's bit if height is above threshold
-		if (self._get_height(self._get_vert(vert_zero, idx)) > self.threshold):
+		if (self._get_height(self.tables.vert_idx_to_pos(vert_zero, idx)) > self.threshold):
 			cube_idx |= 1 << idx
 
 	return cube_idx
@@ -122,26 +126,26 @@ func _generate_mesh_vertices(vert_zero: Vector3i, vert_arr: Array[Vector3]):
 	var cube_idx: int = self._get_cube_idx(vert_zero)
 
 	# Get Array of crossed edges' indices for cube_idx. Triangulation step.
-	var tri_edges: Array = self._CUBE_TO_TRI_EDGES_TABLE[cube_idx]
+	var tri_edges: Array = self.tables.CUBE_TO_TRI_EDGES_TABLE[cube_idx]
 
 	# for each crossed edge idx in cube
 	for edge_idx: int in tri_edges:
 
 		# lookup the cube verts that forms the edge
-		var idx_a: int = self._EDGE_TO_VERT_TABLE[edge_idx][0];
-		var idx_b: int = self._EDGE_TO_VERT_TABLE[edge_idx][1];
+		var idx_a: int = self.tables.EDGE_TO_VERT_TABLE[edge_idx][0];
+		var idx_b: int = self.tables.EDGE_TO_VERT_TABLE[edge_idx][1];
 
 		# interpolate vertices for smooth mesh
 		var vert_smooth: Vector3 = self._interpolate(
 			self.threshold,
-			self._get_vert(vert_zero, idx_a),
-			self._get_vert(vert_zero, idx_b),
+			self.tables.vert_idx_to_pos(vert_zero, idx_a),
+			self.tables.vert_idx_to_pos(vert_zero, idx_b),
 		)
 
 		# or divide half for blockiness
 		var vert_hard: Vector3 = (
 			Vector3(vert_zero)
-			+ (self._VERT_OFFSET_TABLE[idx_a] + self._VERT_OFFSET_TABLE[idx_b]) / 2.0
+			+ (self.tables.VERT_OFFSET_TABLE[idx_a] + self.tables.VERT_OFFSET_TABLE[idx_b]) / 2.0
 		)
 
 		# mix those. more fine control > optimization here!
@@ -206,8 +210,10 @@ func _resample_density() -> void:
 				var flat_idx = x_flat_idx + y_flat_idx + z
 
 				# we're dividing by vert width to make sure UV 1:1 match width
-				var height: float = self.sample_density(
-					self._normalize_coordinate(Vector3(x, y, z))
+				var height: float = self.density_func.sample_density(
+					self._normalize_coordinate(Vector3(x, y, z)),
+					self.chunk_pos,
+					self.density_type,
 				)
 
 				self._heights[flat_idx] = height
@@ -276,7 +282,7 @@ func regenerate_all() -> void:
 
 ## Convenience wrapper for setting noise seed. Regenerate noise & mesh.
 func set_seed(new_seed: int) -> void:
-	self.noise.seed = new_seed
+	self.density_func.set_noise_seed(new_seed)
 	self._resample_density()
 	self.regenerate_mesh()
 

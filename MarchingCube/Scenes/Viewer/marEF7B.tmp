@@ -104,23 +104,24 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 text = "Pos:"
 
-[node name="ViewOptionContainer" type="VBoxContainer" parent="UI/FullScreen"]
+[node name="BottomControls" type="HBoxContainer" parent="UI/FullScreen"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -222.0
-offset_top = -220.0
-grow_horizontal = 0
+offset_left = -354.0
+offset_top = -46.0
+offset_right = 354.0
+grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="PauseButton" type="CheckBox" parent="UI/FullScreen/ViewOptionContainer"]
+[node name="PauseButton" type="CheckBox" parent="UI/FullScreen/BottomControls"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
@@ -128,7 +129,21 @@ keep_pressed_outside = true
 text = " Pause Movement "
 icon_alignment = 1
 
-[node name="RotationButton" type="CheckBox" parent="UI/FullScreen/ViewOptionContainer"]
+[node name="VertShowButton" type="CheckBox" parent="UI/FullScreen/BottomControls"]
+layout_mode = 2
+size_flags_vertical = 4
+keep_pressed_outside = true
+text = " Show Verts "
+icon_alignment = 1
+
+[node name="FlatShadeButton" type="CheckBox" parent="UI/FullScreen/BottomControls"]
+layout_mode = 2
+size_flags_vertical = 4
+keep_pressed_outside = true
+text = " Flat Shade "
+icon_alignment = 1
+
+[node name="RotationButton" type="CheckBox" parent="UI/FullScreen/BottomControls"]
 layout_mode = 2
 size_flags_vertical = 4
 button_pressed = true
@@ -136,27 +151,13 @@ keep_pressed_outside = true
 text = " Rotation "
 icon_alignment = 1
 
-[node name="VertShowButton" type="CheckBox" parent="UI/FullScreen/ViewOptionContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-keep_pressed_outside = true
-text = " Show Verts "
-icon_alignment = 1
-
-[node name="FlatShadeButton" type="CheckBox" parent="UI/FullScreen/ViewOptionContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-keep_pressed_outside = true
-text = " Flat Shade "
-icon_alignment = 1
-
-[node name="AdjustmentsContainer" type="VBoxContainer" parent="UI/FullScreen"]
+[node name="SideControls" type="VBoxContainer" parent="UI/FullScreen"]
 custom_minimum_size = Vector2(410, 0)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -235.0
+offset_top = -216.0
 offset_right = 410.0
 grow_vertical = 0
 size_flags_horizontal = 0
@@ -164,40 +165,10 @@ size_flags_vertical = 8
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="DensityContainer" type="HBoxContainer" parent="UI/FullScreen/AdjustmentsContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/FullScreen/SideControls"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/FullScreen/AdjustmentsContainer/DensityContainer"]
-layout_mode = 2
-text = "Density Function"
-
-[node name="OptionButton" type="OptionButton" parent="UI/FullScreen/AdjustmentsContainer/DensityContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-selected = 0
-item_count = 1
-popup/item_0/text = "Placeholder"
-
-[node name="SpinboxContainer" type="VBoxContainer" parent="UI/FullScreen/AdjustmentsContainer"]
-layout_mode = 2
-
-[node name="FreqSpinBox" type="SpinBox" parent="UI/FullScreen/AdjustmentsContainer/SpinboxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_vertical = 4
-mouse_force_pass_scroll_events = false
-mouse_default_cursor_shape = 2
-max_value = 2.0
-step = 0.05
-value = 1.0
-alignment = 3
-prefix = "Frequency"
-custom_arrow_step = 0.05
-script = ExtResource("6_k8k2w")
-
-[node name="WSpinBox" type="SpinBox" parent="UI/FullScreen/AdjustmentsContainer/SpinboxContainer"]
+[node name="WSpinBox" type="SpinBox" parent="UI/FullScreen/SideControls/VBoxContainer2"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -211,7 +182,7 @@ prefix = "Width"
 custom_arrow_step = 1.0
 script = ExtResource("6_k8k2w")
 
-[node name="ThresholdSpinBox" type="SpinBox" parent="UI/FullScreen/AdjustmentsContainer/SpinboxContainer"]
+[node name="ThresholdSpinBox" type="SpinBox" parent="UI/FullScreen/SideControls/VBoxContainer2"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -225,7 +196,7 @@ prefix = "Threshold"
 custom_arrow_step = 0.1
 script = ExtResource("6_k8k2w")
 
-[node name="SmoothnessSpinBox" type="SpinBox" parent="UI/FullScreen/AdjustmentsContainer/SpinboxContainer"]
+[node name="SmoothnessSpinBox" type="SpinBox" parent="UI/FullScreen/SideControls/VBoxContainer2"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -239,7 +210,7 @@ prefix = "Smoothness"
 custom_arrow_step = 0.1
 script = ExtResource("6_k8k2w")
 
-[node name="BlendingSpinBox" type="SpinBox" parent="UI/FullScreen/AdjustmentsContainer/SpinboxContainer"]
+[node name="BlendingSpinBox" type="SpinBox" parent="UI/FullScreen/SideControls/VBoxContainer2"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -253,10 +224,10 @@ prefix = "TextureBlend"
 custom_arrow_step = 0.2
 script = ExtResource("6_k8k2w")
 
-[node name="SeedContainer" type="HBoxContainer" parent="UI/FullScreen/AdjustmentsContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="UI/FullScreen/SideControls"]
 layout_mode = 2
 
-[node name="SeedLabel" type="LineEdit" parent="UI/FullScreen/AdjustmentsContainer/SeedContainer"]
+[node name="SeedLabel" type="LineEdit" parent="UI/FullScreen/SideControls/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -264,7 +235,7 @@ focus_mode = 0
 placeholder_text = "Seed"
 expand_to_text_length = true
 
-[node name="RandomizeButton" type="Button" parent="UI/FullScreen/AdjustmentsContainer/SeedContainer"]
+[node name="RandomizeButton" type="Button" parent="UI/FullScreen/SideControls/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -277,8 +248,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -240.0
-offset_bottom = 98.0
+offset_left = -277.0
+offset_right = -5.0
+offset_bottom = 112.0
 grow_horizontal = 0
 theme_override_constants/separation = 20
 
@@ -295,25 +267,21 @@ text = "Rotate cam
 Reset cam
 Zoom"
 
-[connection signal="toggled" from="UI/FullScreen/ViewOptionContainer/PauseButton" to="." method="_on_pause_button_toggled"]
-[connection signal="toggled" from="UI/FullScreen/ViewOptionContainer/RotationButton" to="." method="_on_rotation_button_toggled"]
-[connection signal="toggled" from="UI/FullScreen/ViewOptionContainer/VertShowButton" to="." method="_on_vert_show_button_toggled"]
-[connection signal="toggled" from="UI/FullScreen/ViewOptionContainer/FlatShadeButton" to="." method="_on_flat_shade_button_toggled"]
-[connection signal="item_selected" from="UI/FullScreen/AdjustmentsContainer/DensityContainer/OptionButton" to="." method="_on_option_button_item_selected"]
-[connection signal="mouse_entered" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/FreqSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/FreqSpinBox" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/FreqSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/FreqSpinBox" method="_on_mouse_exited"]
-[connection signal="value_changed" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/FreqSpinBox" to="." method="_on_freq_spin_box_value_changed"]
-[connection signal="mouse_entered" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/WSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/WSpinBox" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/WSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/WSpinBox" method="_on_mouse_exited"]
-[connection signal="value_changed" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/WSpinBox" to="." method="_on_w_spin_box_value_changed"]
-[connection signal="mouse_entered" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/ThresholdSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/ThresholdSpinBox" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/ThresholdSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/ThresholdSpinBox" method="_on_mouse_exited"]
-[connection signal="value_changed" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/ThresholdSpinBox" to="." method="_on_threshold_spin_box_value_changed"]
-[connection signal="mouse_entered" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/SmoothnessSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/SmoothnessSpinBox" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/SmoothnessSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/SmoothnessSpinBox" method="_on_mouse_exited"]
-[connection signal="value_changed" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/SmoothnessSpinBox" to="." method="_on_smoothness_spin_box_value_changed"]
-[connection signal="mouse_entered" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/BlendingSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/BlendingSpinBox" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/BlendingSpinBox" to="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/BlendingSpinBox" method="_on_mouse_exited"]
-[connection signal="value_changed" from="UI/FullScreen/AdjustmentsContainer/SpinboxContainer/BlendingSpinBox" to="." method="_on_blending_spin_box_value_changed"]
-[connection signal="text_submitted" from="UI/FullScreen/AdjustmentsContainer/SeedContainer/SeedLabel" to="." method="_on_seed_label_text_submitted"]
-[connection signal="pressed" from="UI/FullScreen/AdjustmentsContainer/SeedContainer/RandomizeButton" to="." method="_on_randomize_button_pressed"]
+[connection signal="toggled" from="UI/FullScreen/BottomControls/PauseButton" to="." method="_on_pause_button_toggled"]
+[connection signal="toggled" from="UI/FullScreen/BottomControls/VertShowButton" to="." method="_on_vert_show_button_toggled"]
+[connection signal="toggled" from="UI/FullScreen/BottomControls/FlatShadeButton" to="." method="_on_flat_shade_button_toggled"]
+[connection signal="toggled" from="UI/FullScreen/BottomControls/RotationButton" to="." method="_on_rotation_button_toggled"]
+[connection signal="mouse_entered" from="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" method="_on_mouse_exited"]
+[connection signal="value_changed" from="UI/FullScreen/SideControls/VBoxContainer2/WSpinBox" to="." method="_on_w_spin_box_value_changed"]
+[connection signal="mouse_entered" from="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" method="_on_mouse_exited"]
+[connection signal="value_changed" from="UI/FullScreen/SideControls/VBoxContainer2/ThresholdSpinBox" to="." method="_on_threshold_spin_box_value_changed"]
+[connection signal="mouse_entered" from="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" method="_on_mouse_exited"]
+[connection signal="value_changed" from="UI/FullScreen/SideControls/VBoxContainer2/SmoothnessSpinBox" to="." method="_on_smoothness_spin_box_value_changed"]
+[connection signal="mouse_entered" from="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" to="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" method="_on_mouse_exited"]
+[connection signal="value_changed" from="UI/FullScreen/SideControls/VBoxContainer2/BlendingSpinBox" to="." method="_on_blending_spin_box_value_changed"]
+[connection signal="text_submitted" from="UI/FullScreen/SideControls/VBoxContainer/SeedLabel" to="." method="_on_seed_label_text_submitted"]
+[connection signal="pressed" from="UI/FullScreen/SideControls/VBoxContainer/RandomizeButton" to="." method="_on_randomize_button_pressed"]
