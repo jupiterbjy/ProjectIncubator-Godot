@@ -43,12 +43,12 @@ func _ready() -> void:
 	for _name in self.marching_cube.density_func.FUNC_TYPE:
 		option_btn.add_item(_name)
 	
-	# set initial density option & noise frequency selection just in case
-	self.marching_cube.density_type = option_btn.selected
-	self.marching_cube.density_func.set_noise_frequency(%FreqSpinBox.value)
-	
 	# init cube
 	self.marching_cube.regenerate_all()
+
+	# set initial density option & noise frequency selection just in case
+	self.marching_cube.density_type = option_btn.selected
+	self.marching_cube.set_noise_frequency(%FreqSpinBox.value)
 
 
 # --- Signals ---
@@ -65,8 +65,7 @@ func _on_randomize_button_pressed() -> void:
 	var val := randi()
 	%SeedLabel.text = str(val)
 
-	self.marching_cube.set_seed(val)
-	self.marching_cube.regenerate_mesh()
+	self.marching_cube.set_noise_seed(val)
 
 
 func _on_pause_button_toggled(toggled_on: bool) -> void:
@@ -102,4 +101,4 @@ func _on_option_button_item_selected(index: int) -> void:
 
 
 func _on_freq_spin_box_value_changed(value: float) -> void:
-	self.marching_cube.density_func.set_noise_frequency(value)
+	self.marching_cube.set_noise_frequency(value)

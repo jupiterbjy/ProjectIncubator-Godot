@@ -211,6 +211,7 @@ func _resample_density() -> void:
 
 				# we're dividing by vert width to make sure UV 1:1 match width
 				var height: float = self.density_func.sample_density(
+					self.noise,
 					self._normalize_coordinate(Vector3(x, y, z)),
 					self.chunk_pos,
 					self.density_type,
@@ -266,7 +267,7 @@ func _create_markers() -> void:
 				self._markers[x_flat_idx + y_flat_idx + z] = instance
 
 
-# --- Generation Wrappers ---
+# --- Interfaces ---
 # Convenient helper methods that sets parameter & regenerate mesh as needed.
 # For actual in-game usage, most of is probably not needed.
 
@@ -279,12 +280,6 @@ func regenerate_all() -> void:
 	self._resample_density()
 	self.regenerate_mesh()
 
-
-## Convenience wrapper for setting noise seed. Regenerate noise & mesh.
-func set_seed(new_seed: int) -> void:
-	self.density_func.set_noise_seed(new_seed)
-	self._resample_density()
-	self.regenerate_mesh()
 
 
 ## Convenience setup func for setting threshold. Updates mesh.
@@ -332,3 +327,24 @@ func set_chunk_pos(new_chunk_pos: Vector3) -> void:
 func set_blending_factor(factor: float) -> void:
 	var mat: ShaderMaterial = self._mesh_instance.get_active_material(0)
 	mat.set_shader_parameter("BlendFactor", factor)
+
+
+## Convenience wrapper for setting noise seed. Regenerate noise & mesh.
+func set_noise_seed(new_seed: int) -> void:
+	self.noise.seed = new_seed
+	self._resample_density()
+	self.regenerate_mesh()
+
+
+## Set noise scale
+func set_noise_frequency(new_freq: float) -> void:
+	self.noise.frequency = new_freq
+	self._resample_density()
+	self.regenerate_mesh()
+
+
+## Set noise offset
+func set_noise_offset(new_offset: Vector3) -> void:
+	self.noise.offset = new_offset
+	self._resample_density()
+	self.regenerate_mesh()
