@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bi5ucj5u1w7cd"]
+
+[ext_resource type="Script" path="res://Scenes/main.gd" id="1_tkgp2"]
+[ext_resource type="Shader" path="res://pointcloud.gdshader" id="2_7c0js"]
+[ext_resource type="Texture2D" uid="uid://dfhh621idydp2" path="res://point_sprite.png" id="3_hhgtv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fhwqm"]
+render_priority = 0
+shader = ExtResource("2_7c0js")
+shader_parameter/point_size = 16.0
+shader_parameter/sprite = ExtResource("3_hhgtv")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_brgdu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bn455"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_tkgp2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_fhwqm")
+mesh = SubResource("ArrayMesh_brgdu")
+
+[node name="Area3D" type="Area3D" parent="."]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_bn455")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Turntable" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Turntable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
