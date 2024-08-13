@@ -29,7 +29,10 @@ static var _RAY_LENGTH: float = 100.0
 static var _RAY_MASK: int = 1
 
 # scan points count per scan line
-static var POINTS_PER_LINE: int = 100
+static var _POINTS_PER_CURSOR: int = 20
+
+# starting packedarray size
+static var _ARR_INIT_SIZE: int = 4096
 
 
 # --- Utility ---
@@ -94,8 +97,10 @@ func scan_area(scanned_perc: float) -> void:
 
 func _ready() -> void:
 	# prealloctate packedarray
-	self.colors.resize(2048)
-	self.points.resize(2048)
+	self.colors.resize(self._ARR_INIT_SIZE)
+	self.points.resize(self._ARR_INIT_SIZE)
+	
+	# TODO: create collision shape in code
 
 
 func _physics_process(delta: float) -> void:
@@ -105,10 +110,13 @@ func _physics_process(delta: float) -> void:
 	self.el_axis.rotate_x(delta * 0.2)
 	
 	# scan multiple times per line sweep
-	for idx: int in range(POINTS_PER_LINE):
-		self.scan_area(idx / float(POINTS_PER_LINE))
+	for idx: int in range(_POINTS_PER_CURSOR):
+		self.scan_area(idx / float(_POINTS_PER_CURSOR))
 
 	# if size is in danger expand packedarrays twice of current size
-	if len(self.points) - self.point_count < POINTS_PER_LINE:
-		self.points.resize(len(self.points) * 2)
-		self.colors.resize(len(self.colors) * 2)
+	var length: int = len(self.points)
+	
+	if length - self.point_count < _POINTS_PER_CURSOR:
+		print("[RaycastScene] Resizing array! (%s → %s)" % [length, length * 2])
+		self.points.resize(length * 2)
+		self.colors.resize(length * 2)
