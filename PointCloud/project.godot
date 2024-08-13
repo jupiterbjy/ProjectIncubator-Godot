@@ -16,6 +16,13 @@ run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+window/stretch/mode="canvas_items"
+
 [filesystem]
 
 import/blender/enabled=false
@@ -23,8 +30,10 @@ import/blender/enabled=false
 [physics]
 
 3d/run_on_separate_thread=true
+common/physics_ticks_per_second=45
 3d/default_gravity=0.0
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
 anti_aliasing/quality/screen_space_aa=1

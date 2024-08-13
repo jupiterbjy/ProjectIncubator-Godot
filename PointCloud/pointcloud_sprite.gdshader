@@ -1,11 +1,13 @@
 // Written by jupiterbjy@gmail.com
 // As part of https://github.com/jupiterbjy/ProjectIncubator-Godot
+// Uses sprite image for each points
 
 shader_type spatial;
 render_mode depth_prepass_alpha, fog_disabled, specular_disabled, unshaded;
 
 
 uniform float point_size = 16.0;
+uniform sampler2D sprite;
 
 
 void vertex() {
@@ -18,6 +20,6 @@ void vertex() {
 void fragment() {
 	// Use sprite as point image
 	
-	ALBEDO = COLOR.rgb;
-	ALPHA = COLOR.a;
+	ALBEDO = texture(sprite, POINT_COORD).rgb * COLOR.rgb;
+	ALPHA = texture(sprite, POINT_COORD).a * COLOR.a;
 }
