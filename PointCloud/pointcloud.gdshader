@@ -2,7 +2,7 @@
 // As part of https://github.com/jupiterbjy/ProjectIncubator-Godot
 
 shader_type spatial;
-render_mode depth_prepass_alpha, unshaded, fog_disabled, specular_disabled;
+render_mode depth_prepass_alpha, fog_disabled, specular_disabled, unshaded;
 
 
 uniform float point_size = 16.0;
@@ -18,6 +18,6 @@ void vertex() {
 void fragment() {
 	// Use sprite as point image
 	
-	ALBEDO = texture(sprite, POINT_COORD).rgb;
-	ALPHA = texture(sprite, POINT_COORD).a;
+	ALBEDO = texture(sprite, POINT_COORD).rgb * COLOR.rgb;
+	ALPHA = texture(sprite, POINT_COORD).a * COLOR.a;
 }
