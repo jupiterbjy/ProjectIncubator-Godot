@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://djpefujx54pnx"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_mcjpy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rv1ly"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_geosv"]
+radius = 10.0
+height = 30.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mbn80"]
+
+[node name="Player" type="RigidBody2D"]
+position = Vector2(183, 308)
+physics_material_override = SubResource("PhysicsMaterial_rv1ly")
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_mcjpy")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(1, 0.35, 0.35, 1)
+mesh = SubResource("CapsuleMesh_geosv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_mbn80")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

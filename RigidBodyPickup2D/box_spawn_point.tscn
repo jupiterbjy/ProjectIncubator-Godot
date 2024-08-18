@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsakhcvmbs2oa"]
+
+[ext_resource type="Script" path="res://box_spawn_point.gd" id="1_v2yq2"]
+[ext_resource type="PackedScene" uid="uid://dih2klk23s54y" path="res://box.tscn" id="2_cubhr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_l2nbo"]
+radius = 10.0
+height = 20.0
+
+[node name="BoxSpawnPoint" type="MeshInstance2D"]
+modulate = Color(0, 1, 1, 1)
+position = Vector2(500, 100)
+mesh = SubResource("SphereMesh_l2nbo")
+script = ExtResource("1_v2yq2")
+box_scene = ExtResource("2_cubhr")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

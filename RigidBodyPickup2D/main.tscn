@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdrbt1ytcqys5"]
+
+[ext_resource type="PackedScene" uid="uid://djpefujx54pnx" path="res://player.tscn" id="1_ci1mg"]
+[ext_resource type="Script" path="res://main.gd" id="1_lk1k1"]
+[ext_resource type="PackedScene" uid="uid://bsakhcvmbs2oa" path="res://box_spawn_point.tscn" id="3_yaqho"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0q3v3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lm1m0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bc17d"]
+size = Vector3(4000, 200, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_lk1k1")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 500)
+physics_material_override = SubResource("PhysicsMaterial_0q3v3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_lm1m0")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+modulate = Color(0.402133, 0.65, 0.364, 1)
+position = Vector2(0, 100)
+mesh = SubResource("BoxMesh_bc17d")
+
+[node name="Player" parent="." instance=ExtResource("1_ci1mg")]
+
+[node name="BoxSpawnPoint" parent="." instance=ExtResource("3_yaqho")]
+
+[node name="UIScreen" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1000.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Control" type="Control" parent="UIScreen"]
+layout_mode = 2
+
+[node name="Copyright" type="Label" parent="UIScreen/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 169.0
+grow_vertical = 0
+text = "jupiterbjy@gmail.com"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIScreen/Control"]
+layout_mode = 1
+offset_right = 1000.0
+offset_bottom = 648.0
+
+[node name="HeightLabel" type="Label" parent="UIScreen/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "height"
+
+[node name="BoxLabel" type="Label" parent="UIScreen/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "box"
