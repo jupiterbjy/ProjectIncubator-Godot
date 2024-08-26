@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://c2dr3s2dkiwwt"]
+
+[ext_resource type="Shader" path="res://Scenes/3D/Core/MarchingCube/Shader/triplanar_uv.gdshader" id="1_blbj8"]
+[ext_resource type="Texture2D" uid="uid://4te7yy4x0whh" path="res://Scenes/3D/Core/MarchingCube/Shader/x.png" id="2_2akeu"]
+[ext_resource type="Texture2D" uid="uid://dp3qqmxc4xm0p" path="res://Scenes/3D/Core/MarchingCube/Shader/y.png" id="3_rwxqj"]
+[ext_resource type="Texture2D" uid="uid://blvvrs221od60" path="res://Scenes/3D/Core/MarchingCube/Shader/z.png" id="4_prewl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p0gay"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2mus0"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_p0gay")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_blbj8")
+shader_parameter/BlendFactor = 0.01
+shader_parameter/Scale = 0.05
+shader_parameter/TextureX = ExtResource("2_2akeu")
+shader_parameter/TextureY = ExtResource("3_rwxqj")
+shader_parameter/TextureZ = ExtResource("4_prewl")
+shader_parameter/NormalMap = SubResource("NoiseTexture2D_2mus0")

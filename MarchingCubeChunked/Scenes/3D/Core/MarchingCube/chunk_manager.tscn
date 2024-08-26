@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2r5hpb68kegk"]
+
+[ext_resource type="Script" path="res://Scenes/3D/Core/MarchingCube/chunk_manager.gd" id="1_7qq2b"]
+
+[node name="ChunkManager" type="Node3D"]
+script = ExtResource("1_7qq2b")
+chunks_dimension = Vector3i(16, 2, 16)
+max_threads = 6

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bve6skbomtefn"]
+
+[ext_resource type="FontFile" uid="uid://b2m567grun6v" path="res://Resources/Fonts/JetBrainsMono[wght].ttf" id="1_q6him"]
+[ext_resource type="Script" path="res://Scenes/UI/Debug/screen_info.gd" id="2_c0cxt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rqin6"]
+
+[node name="ScreenInfo" type="Label"]
+offset_right = 192.0
+offset_bottom = 43.0
+theme_override_fonts/font = ExtResource("1_q6him")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rqin6")
+text = "Resolution: 123123123
+Framerate : 123123123"
+vertical_alignment = 1
+script = ExtResource("2_c0cxt")

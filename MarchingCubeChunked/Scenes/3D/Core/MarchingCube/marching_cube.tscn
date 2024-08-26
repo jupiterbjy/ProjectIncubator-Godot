@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://ch4idvk0b0b5o"]
+
+[ext_resource type="Script" path="res://Scenes/3D/Core/MarchingCube/marching_cube.gd" id="1_wl5se"]
+[ext_resource type="FastNoiseLite" uid="uid://vxccs1hbjp2n" path="res://Scenes/3D/Core/MarchingCube/noise_3d.tres" id="2_87okm"]
+[ext_resource type="Material" uid="uid://c2dr3s2dkiwwt" path="res://Scenes/3D/Core/MarchingCube/Shader/triplanar_uv_mat.tres" id="3_4fvvg"]
+[ext_resource type="Material" uid="uid://dqe0p85g14q26" path="res://Scenes/3D/Core/MarchingCube/Shader/wireframe_mat.tres" id="4_ldsnm"]
+[ext_resource type="ArrayMesh" uid="uid://wrbpggrdpi2c" path="res://Scenes/3D/Core/MarchingCube/cube_basic.mesh" id="5_lau83"]
+[ext_resource type="Shader" path="res://Scenes/3D/Core/MarchingCube/Shader/chunk_debug.gdshader" id="6_2kqob"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u88h3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxetl"]
+render_priority = 0
+shader = ExtResource("6_2kqob")
+
+[node name="MarchingCube" type="Node3D" groups=["CHUNKS"]]
+script = ExtResource("1_wl5se")
+noise = ExtResource("2_87okm")
+
+[node name="MeshInstance" type="MeshInstance3D" parent="."]
+material_override = ExtResource("3_4fvvg")
+material_overlay = ExtResource("4_ldsnm")
+mesh = SubResource("ArrayMesh_u88h3")
+skeleton = NodePath("../StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+
+[node name="DebugChunkArea" type="MeshInstance3D" parent="." groups=["DEBUG"]]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0.5, 0.5)
+cast_shadow = 0
+instance_shader_parameters/is_generating = false
+mesh = ExtResource("5_lau83")
+surface_material_override/0 = SubResource("ShaderMaterial_wxetl")

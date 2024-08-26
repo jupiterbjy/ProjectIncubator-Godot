@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dqe0p85g14q26"]
+
+[ext_resource type="Shader" path="res://Scenes/3D/Core/MarchingCube/Shader/wireframe.gdshader" id="1_l5nol"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_l5nol")
+shader_parameter/albedo = Color(1, 0, 0, 0)
+shader_parameter/displacement = 3.0

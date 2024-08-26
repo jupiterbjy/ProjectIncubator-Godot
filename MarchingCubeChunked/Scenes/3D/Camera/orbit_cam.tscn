@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://des2n00ov1bh7"]
+
+[ext_resource type="Script" path="res://Scenes/3D/Camera/orbit_cam.gd" id="1_2e2fa"]
+
+[node name="OrbitCam" type="Node3D"]
+script = ExtResource("1_2e2fa")
+
+[node name="Azimuth" type="Node3D" parent="."]
+
+[node name="Elevation" type="Node3D" parent="Azimuth"]
+
+[node name="Camera3D" type="Camera3D" parent="Azimuth/Elevation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+fov = 40.0
