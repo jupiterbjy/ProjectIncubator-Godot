@@ -171,8 +171,7 @@ func _generate_vertex_arr() -> Array[Vector3]:
 	return verts
 
 
-## Generate mesh vertex arr. Surftool seems to be not thread-safe, so
-## actual surftool usage should be done in main thread. So call this deferred.
+## Generate mesh from given vertices
 func _generate_mesh(verts: Array[Vector3]) -> void:
 
 	# setup surf tool
