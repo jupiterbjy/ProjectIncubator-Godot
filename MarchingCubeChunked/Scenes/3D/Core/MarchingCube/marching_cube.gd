@@ -89,7 +89,7 @@ func _interpolate(iso_level: float, vert_a: Vector3i, vert_b: Vector3i) -> Vecto
 	return Vector3(vert_a) + factor * Vector3(vert_b - vert_a)
 
 
-## enable generating flag
+## enable generating flag + safeguard to make sure one chunk is processed by one thread only
 func _debug_set_generating() -> void:
 	self.generation_mutex.lock()
 	self.debug_area_boundary.set_instance_shader_parameter("is_generating", true)
@@ -181,8 +181,6 @@ func _generate_mesh(verts: Array[Vector3]) -> void:
 	# smooth group will smooth ALL in same group. EVEN IF we didn't merge vertices. I luv ya!
 	var smooth_group: int = -1 if self.flat_shading else 0
 
-	# added vertex counter & array
-	# kinda afriad of fragmentation here
 	var vert_idx: int = 0
 
 	# somehow surfacetool still can automatically smooth non-merged vertices.
