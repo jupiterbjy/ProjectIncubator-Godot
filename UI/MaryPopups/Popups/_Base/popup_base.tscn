@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvmtp3tjquj1h"]
+
+[ext_resource type="Script" uid="uid://cjqkypsjllh42" path="res://Popups/_Base/popup_base.gd" id="1_0vwhb"]
+[ext_resource type="Texture2D" uid="uid://cw8inxugm6hpv" path="res://Popups/_Base/Resources/close_24dp_314D1C_FILL0_wght400_GRAD0_opsz24.svg" id="2_rbcph"]
+[ext_resource type="Texture2D" uid="uid://c2hfxdc5aj85k" path="res://Popups/_Base/Resources/close_24dp_EA3323_FILL0_wght400_GRAD0_opsz24.svg" id="3_4t40s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vwhb"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.482353)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.497513, 0.999999, 0.527505, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rmi4j"]
+content_margin_left = 8.0
+content_margin_right = 2.0
+bg_color = Color(0.498039, 1, 0.529412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.498039, 1, 0.529412, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[node name="PopupBase" type="Panel"]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -920.0
+offset_bottom = -480.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0vwhb")
+script = ExtResource("1_0vwhb")
+title = "Ze Title goes here!"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rmi4j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0.298039, 0, 1)
+text = "Ze Title goes here!"
+
+[node name="CloseButton" type="TextureButton" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+texture_normal = ExtResource("2_rbcph")
+texture_hover = ExtResource("3_4t40s")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ZeContentGoesHere" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 9
+
+[node name="ResizeButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[connection signal="gui_input" from="VBoxContainer/PanelContainer/HBoxContainer/TitleLabel" to="." method="_on_title_label_gui_input"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="button_down" from="ResizeButton" to="." method="_on_resize_button_button_down"]
+[connection signal="button_up" from="ResizeButton" to="." method="_on_resize_button_button_up"]
+[connection signal="gui_input" from="ResizeButton" to="." method="_on_resize_button_gui_input"]
+[connection signal="pressed" from="ResizeButton" to="." method="_on_resize_button_pressed"]

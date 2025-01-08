@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbxb8pdr13idc"]
+
+[ext_resource type="PackedScene" uid="uid://bvmtp3tjquj1h" path="res://Popups/_Base/popup_base.tscn" id="1_ig8a2"]
+[ext_resource type="Script" uid="uid://bhecvvnktawvg" path="res://Popups/SubViewportPopup/sub_viewport_popup.gd" id="2_0ibgd"]
+[ext_resource type="PackedScene" uid="uid://c83vh1bgbb2n5" path="res://Popups/SubViewportPopup/Resources/neko.glb" id="3_83hpg"]
+[ext_resource type="Script" uid="uid://b50fd5v2d5r0k" path="res://Popups/SubViewportPopup/Resources/neko.gd" id="4_82woi"]
+
+[node name="SubViewportPopup" instance=ExtResource("1_ig8a2")]
+script = ExtResource("2_0ibgd")
+title = "SubViewport Demo That actually is just AD"
+
+[node name="TitleLabel" parent="VBoxContainer/PanelContainer/HBoxContainer" index="0"]
+text = "SubViewport Demo That actually is just AD"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/ZeContentGoesHere" index="0"]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/ZeContentGoesHere/SubViewportContainer" index="0"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1552, 891)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="VBoxContainer/ZeContentGoesHere/SubViewportContainer/SubViewport" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 5)
+fov = 40.0
+
+[node name="neko" parent="VBoxContainer/ZeContentGoesHere/SubViewportContainer/SubViewport" index="1" instance=ExtResource("3_83hpg")]
+script = ExtResource("4_82woi")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="VBoxContainer/ZeContentGoesHere/SubViewportContainer/SubViewport" index="2"]
+
+[node name="AD" type="RichTextLabel" parent="VBoxContainer/ZeContentGoesHere/SubViewportContainer/SubViewport" index="3"]
+offset_left = 19.0
+offset_top = 47.0
+offset_right = 847.0
+offset_bottom = 173.0
+rotation = -0.0722772
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[rainbow freq=1.0 sat=0.8 val=0.8][wave amp=50.0 freq=5.0 connected=1]Cost only 99999KRW !!![/wave][/rainbow]"

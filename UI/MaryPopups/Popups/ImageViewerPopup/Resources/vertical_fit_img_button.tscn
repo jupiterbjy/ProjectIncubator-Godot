@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvqh8mkxlyrsb"]
+
+[ext_resource type="Script" uid="uid://bxsj7hkj3rdyd" path="res://Popups/ImageViewerPopup/Resources/vertical_fit_img_button.gd" id="1_32hw6"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_llf3g"]
+
+[node name="VerticalFitImageButton" type="TextureRect"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("PlaceholderTexture2D_llf3g")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("1_32hw6")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
