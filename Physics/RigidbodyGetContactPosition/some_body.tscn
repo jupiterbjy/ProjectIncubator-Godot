@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://be5p48fp1xhi"]
+
+[ext_resource type="Script" uid="uid://dqs1fsvmrw887" path="res://some_body.gd" id="1_xpmoe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tsapr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xpmoe"]
+
+[node name="SomeBody" type="RigidBody3D"]
+script = ExtResource("1_xpmoe")
+
+[node name="LeftLegColl" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+shape = SubResource("BoxShape3D_tsapr")
+
+[node name="RightLegColl" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_xpmoe")

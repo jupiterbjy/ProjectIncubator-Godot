@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://5egu1n0klr3y"]
+
+[ext_resource type="Script" uid="uid://dw8f785lvs314" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://be5p48fp1xhi" path="res://some_body.tscn" id="1_ig7tw"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_7dm0k"]
+map_width = 5
+map_depth = 5
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ig7tw"]
+bounce = 1.0
+absorbent = true
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_0xm2m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("HeightMapShape3D_7dm0k")
+
+[node name="SomeBody" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+physics_material_override = SubResource("PhysicsMaterial_ig7tw")
+contact_monitor = true
+max_contacts_reported = 8
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="MarginArea" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIArea" type="Control" parent="MarginArea"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginArea/UIArea"]
+layout_mode = 0
+offset_right = 324.0
+offset_bottom = 23.0
+text = "NOTE:  ENABLE DEBUG>SHOW COLLISION SHAPE
+PRESS SPACEBAR TO RESET"
+
+[node name="ReportContainer" type="VBoxContainer" parent="MarginArea/UIArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[connection signal="body_shape_entered" from="SomeBody" to="SomeBody" method="_on_body_shape_entered"]
+[connection signal="contact_report" from="SomeBody" to="." method="_on_some_body_contact_report"]
