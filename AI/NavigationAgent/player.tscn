@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://saqfie2nrwn6"]
+
+[ext_resource type="Script" uid="uid://dh6dmtt8b3vb8" path="res://player.gd" id="1_rr4vh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(0.639216, 0, 0, 1)
+
+[node name="Franklin" type="RigidBody3D"]
+collision_layer = 3
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+linear_damp = 0.5
+script = ExtResource("1_rr4vh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_7dm0k")
+debug_fill = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ig7tw")
+surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+radius = 1.0
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "Agent
+(Player)"

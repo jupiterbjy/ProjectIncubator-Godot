@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvbqroncclor2"]
+
+[ext_resource type="Texture2D" uid="uid://b7ki7483f6cxu" path="res://icon.svg" id="2_swdqf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sn1p1"]
+albedo_color = Color(0.00464857, 0.244348, 4.81308e-08, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckb1s"]
+albedo_color = Color(0.0833333, 1, 0, 1)
+albedo_texture = ExtResource("2_swdqf")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4w8df"]
+material = SubResource("StandardMaterial3D_ckb1s")
+size = Vector2(1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
+radius = 12.0
+
+[node name="InactiveLamar" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+linear_damp = 0.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0xm2m")
+debug_fill = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_h2yge")
+surface_material_override/0 = SubResource("StandardMaterial3D_sn1p1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.508866)
+mesh = SubResource("PlaneMesh_4w8df")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 2.0
+avoidance_enabled = true
+radius = 1.0
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0, 1, 0.966667, 1)
+debug_path_custom_point_size = 16.0
+
+[node name="YeeYeeAssHaircutDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="YeeYeeAssHaircutDetector"]
+shape = SubResource("SphereShape3D_0xm2m")
+debug_color = Color(0.203384, 0.63996, 1.92523e-07, 0.419608)
+debug_fill = false
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "Agent
+(Inactive)"
