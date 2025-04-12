@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw8nk5k20tpjy"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_7dm0k"]
+size = Vector2(1, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ig7tw"]
+viewport_path = NodePath("MeshInstance3D/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+resource_local_to_scene = true
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_ig7tw")
+billboard_mode = 1
+
+[node name="Main" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_7dm0k")
+surface_material_override/0 = SubResource("StandardMaterial3D_0xm2m")
+
+[node name="SubViewport" type="SubViewport" parent="MeshInstance3D"]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(512, 256)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MeshInstance3D/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1]{Yay}"
+horizontal_alignment = 1
+vertical_alignment = 1
