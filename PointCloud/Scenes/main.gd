@@ -25,6 +25,8 @@ extends Node3D
 @onready var az_axis: Node3D = $AzimuthTurntable
 @onready var el_axis: Node3D = $AzimuthTurntable/ElevationTurntable
 
+@onready var cam: Camera3D = %Camera3D
+
 ## Totall pointcloud mesh count
 var mesh_count: int = 0
 
@@ -115,6 +117,7 @@ func _process(delta: float) -> void:
 
 
 var _tick: bool = true
+
 
 # Adjust physic frame per second to adjust scan speed.
 func _physics_process(_delta: float) -> void:

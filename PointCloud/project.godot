@@ -12,8 +12,9 @@ config_version=5
 
 config/name="PointCloud"
 config/description="Demonstration of object lidar-ish scanninging and point cloud generation, with basic point cloud shader."
+config/tags=PackedStringArray("demo")
 run/main_scene="res://Scenes/main.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -36,4 +37,3 @@ common/physics_ticks_per_second=45
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
-anti_aliasing/quality/screen_space_aa=1

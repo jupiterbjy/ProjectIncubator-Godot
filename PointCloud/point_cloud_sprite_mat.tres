@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dhgrmkru8r5y3"]
+
+[ext_resource type="Shader" uid="uid://ckllfbpo0odgw" path="res://pointcloud_sprite.gdshader" id="1_xks4g"]
+[ext_resource type="Texture2D" uid="uid://b0at8gpl02h5m" path="res://icon.svg" id="2_p3ugi"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xks4g")
+shader_parameter/point_size = 32.0
+shader_parameter/sprite = ExtResource("2_p3ugi")
+shader_parameter/brightness_multiplier = 2.5
+shader_parameter/uv_start = Vector2(0.2, 0.25)
+shader_parameter/uv_range = Vector2(0.6, 0.6)

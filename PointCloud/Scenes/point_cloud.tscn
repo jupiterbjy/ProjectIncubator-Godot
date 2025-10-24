@@ -1,15 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcv76jiito51a"]
+[gd_scene load_steps=3 format=3 uid="uid://bcv76jiito51a"]
 
-[ext_resource type="Shader" path="res://pointcloud.gdshader" id="1_f3w0g"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fhwqm"]
-render_priority = 0
-shader = ExtResource("1_f3w0g")
-shader_parameter/point_size = 32.0
+[ext_resource type="Material" uid="uid://dhgrmkru8r5y3" path="res://point_cloud_sprite_mat.tres" id="1_tnwqe"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_brgdu"]
 resource_local_to_scene = true
 
 [node name="PointCloud" type="MeshInstance3D"]
-material_override = SubResource("ShaderMaterial_fhwqm")
+material_override = ExtResource("1_tnwqe")
 mesh = SubResource("ArrayMesh_brgdu")

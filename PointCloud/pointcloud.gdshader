@@ -5,7 +5,7 @@ shader_type spatial;
 render_mode depth_prepass_alpha, fog_disabled, specular_disabled, unshaded;
 
 
-uniform float point_size = 16.0;
+uniform float point_size : hint_range(1.0, 1000.0, 1) = 16.0;
 
 
 void vertex() {
@@ -15,9 +15,8 @@ void vertex() {
 	POINT_SIZE = point_size / distance((MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz, CAMERA_POSITION_WORLD);
 }
 
+
 void fragment() {
-	// Use sprite as point image
-	
 	ALBEDO = COLOR.rgb;
 	ALPHA = COLOR.a;
 }
