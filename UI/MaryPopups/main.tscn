@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtgmh2rnc7f0f"]
+[gd_scene load_steps=4 format=3 uid="uid://dtgmh2rnc7f0f"]
 
 [ext_resource type="Script" uid="uid://bam4g3yfs482c" path="res://main.gd" id="1_ig7tw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig7tw"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ig7tw"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -29,6 +33,24 @@ text = "Spawn ImageViewer"
 [node name="ShowADButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 text = "Spawn AD"
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+oversampling_override = 1.0
+title = "dlkajdflasdjf"
+initial_position = 1
+visible = true
+unresizable = false
+borderless = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_ig7tw")
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel"]
+offset_right = 100.0
+offset_bottom = 100.0
+texture = SubResource("PlaceholderTexture2D_ig7tw")
+
+[node name="Popup" type="Popup" parent="."]
+oversampling_override = 1.0
+visible = true
 
 [connection signal="pressed" from="HBoxContainer/ShowImageViewerButton" to="." method="_on_show_image_viewer_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/ShowADButton" to="." method="_on_show_ad_button_pressed"]

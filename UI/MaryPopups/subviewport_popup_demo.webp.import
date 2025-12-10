@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddwugfqi31a3e"
-path="res://.godot/imported/hina_sd2.png-69565026753bb1d27cf93c2abe553bc8.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://sc3ljw5agevb"
+valid=false
 
 [deps]
 
-source_file="res://Popups/ImageViewerPopup/Images/hina_sd2.png"
-dest_files=["res://.godot/imported/hina_sd2.png-69565026753bb1d27cf93c2abe553bc8.ctex"]
+source_file="res://subviewport_popup_demo.webp"
 
 [params]
 

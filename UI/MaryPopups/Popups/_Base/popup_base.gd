@@ -58,7 +58,10 @@ func _on_close_button_pressed() -> void:
 func _on_title_label_gui_input(event: InputEvent) -> void:
 
 	# if left click change state and just return
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if (
+		event is InputEventMouseButton and
+		(event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT
+	):
 		self._is_dragging = event.is_pressed()
 
 		# if it was press event, then change child order,
@@ -69,12 +72,12 @@ func _on_title_label_gui_input(event: InputEvent) -> void:
 
 	# if motion during click follow window
 	if event is InputEventMouseMotion and self._is_dragging:
-		self.position += event.relative
+		self.position += (event as InputEventMouseMotion).relative
 
 
 func _on_resize_button_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and self._is_resize_dragging:
-		self.size += event.relative
+		self.size += (event as InputEventMouseMotion).relative
 
 
 func _on_resize_button_button_down() -> void:

@@ -12,8 +12,9 @@ config_version=5
 
 config/name="MaryPopups"
 config/description="Popup window demonstration by jupiterbjy"
+config/tags=PackedStringArray("demo")
 run/main_scene="uid://dtgmh2rnc7f0f"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]

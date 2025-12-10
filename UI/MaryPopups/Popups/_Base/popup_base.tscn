@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bvmtp3tjquj1h"]
 
-[ext_resource type="Script" uid="uid://cjqkypsjllh42" path="res://Popups/_Base/popup_base.gd" id="1_0vwhb"]
-[ext_resource type="Texture2D" uid="uid://cw8inxugm6hpv" path="res://Popups/_Base/Resources/close_24dp_314D1C_FILL0_wght400_GRAD0_opsz24.svg" id="2_rbcph"]
-[ext_resource type="Texture2D" uid="uid://c2hfxdc5aj85k" path="res://Popups/_Base/Resources/close_24dp_EA3323_FILL0_wght400_GRAD0_opsz24.svg" id="3_4t40s"]
+[ext_resource type="Script" uid="uid://cjqkypsjllh42" path="res://Scenes/Popups/_Base/popup_base.gd" id="1_0vwhb"]
+[ext_resource type="Texture2D" uid="uid://cw8inxugm6hpv" path="res://Scenes/Popups/_Base/Resources/close_24dp_314D1C_FILL0_wght400_GRAD0_opsz24.svg" id="2_rbcph"]
+[ext_resource type="Texture2D" uid="uid://c2hfxdc5aj85k" path="res://Scenes/Popups/_Base/Resources/close_24dp_EA3323_FILL0_wght400_GRAD0_opsz24.svg" id="3_4t40s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vwhb"]
 content_margin_left = 8.0
