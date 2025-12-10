@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://de13n80dn1s4p"]
+
+[ext_resource type="Script" uid="uid://ln81d0uphgu3" path="res://Main/free_cam.gd" id="1_46iyc"]
+
+[node name="FreeCam" type="Node3D"]
+script = ExtResource("1_46iyc")
+
+[node name="Elevation" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Elevation"]
+fov = 40.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bve6skbomtefn"]
 
-[ext_resource type="FontFile" uid="uid://b2m567grun6v" path="res://Resources/Fonts/JetBrainsMono[wght].ttf" id="1_q6him"]
-[ext_resource type="Script" path="res://Scenes/UI/Debug/screen_info.gd" id="2_c0cxt"]
+[ext_resource type="FontFile" uid="uid://b2m567grun6v" path="res://Resources/JetBrainsMono[wght].ttf" id="1_q6him"]
+[ext_resource type="Script" uid="uid://bikek3bbwlvgd" path="res://Main/Debug/screen_info.gd" id="2_c0cxt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rqin6"]
 
