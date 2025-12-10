@@ -12,8 +12,9 @@ config_version=5
 
 config/name="Marching Cube"
 run/main_scene="res://Scenes/Viewer/marching_cube_viewer.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+config/tags=PackedStringArray("demo")
 
 [display]
 
