@@ -1,0 +1,254 @@
+[gd_scene load_steps=9 format=3 uid="uid://b14spmyxbotkd"]
+
+[ext_resource type="Script" uid="uid://bumcq56gtpi0" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bvf4oxry70fku" path="res://control_graph.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://cqyyesb25ia4d" path="res://resources/switch_off.png" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://7764mwds22vw" path="res://angle_pointer.tscn" id="2_7mycd"]
+[ext_resource type="Texture2D" uid="uid://d1yq52krtj2b3" path="res://resources/switch_on.png" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://ccylyhe556ell" path="res://dial.tscn" id="6_5vw27"]
+[ext_resource type="Texture2D" uid="uid://cjl6mkvf2vul" path="res://resources/jupiter_oc.png" id="6_272bh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0xm2m")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7mycd")
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="AnglePointer" parent="VBoxContainer2/PanelContainer/CenterContainer" instance=ExtResource("2_7mycd")]
+unique_name_in_owner = true
+layout_mode = 2
+delay_sec = 0.1
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7mycd")
+
+[node name="Inputs" type="HBoxContainer" parent="VBoxContainer2/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="SwitchContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer2/Inputs"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer2/PanelContainer2/Inputs/SwitchContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SET"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer2/PanelContainer2/Inputs/SwitchContainer"]
+layout_mode = 2
+
+[node name="Switch" type="TextureButton" parent="VBoxContainer2/PanelContainer2/Inputs/SwitchContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("2_1bvp3")
+texture_pressed = ExtResource("3_lquwl")
+
+[node name="Label" type="Label" parent="VBoxContainer2/PanelContainer2/Inputs/SwitchContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "UNSET"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/PanelContainer2/Inputs"]
+layout_mode = 2
+
+[node name="DialContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer2/Inputs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "INPUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputDial" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer" instance=ExtResource("6_5vw27")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer2/PanelContainer2/Inputs"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/PanelContainer2/Inputs/Control"]
+modulate = Color(1, 1, 1, 0.02745098)
+custom_minimum_size = Vector2(224, 224)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -112.0
+offset_right = 112.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_272bh")
+expand_mode = 2
+
+[node name="DialContainer3" type="VBoxContainer" parent="VBoxContainer2/PanelContainer2/Inputs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Proportional"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PDial" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer3" instance=ExtResource("6_5vw27")]
+unique_name_in_owner = true
+layout_mode = 2
+max_val = 9.0
+value = 9.0
+
+[node name="DialContainer4" type="VBoxContainer" parent="VBoxContainer2/PanelContainer2/Inputs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Integral"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IDial" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer4" instance=ExtResource("6_5vw27")]
+unique_name_in_owner = true
+layout_mode = 2
+max_val = 9.0
+value = 0.75
+
+[node name="DialContainer5" type="VBoxContainer" parent="VBoxContainer2/PanelContainer2/Inputs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer5"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Derivative"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DDial" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer5" instance=ExtResource("6_5vw27")]
+unique_name_in_owner = true
+layout_mode = 2
+max_val = 9.0
+value = 1.4
+
+[node name="Graphs" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ControlGraphOutput" type="ColorRect" parent="VBoxContainer2/Graphs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+script = ExtResource("1_ig7tw")
+line_color = Color(0, 0.49, 0.13883331, 1)
+text = "Output"
+max_val = 15.0
+min_val = -15.0
+metadata/_custom_type_script = "uid://bvf4oxry70fku"
+
+[node name="ControlGraphLastError" type="ColorRect" parent="VBoxContainer2/Graphs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+script = ExtResource("1_ig7tw")
+text = "Last Err"
+max_val = 2.0
+min_val = -2.0
+metadata/_custom_type_script = "uid://bvf4oxry70fku"
+
+[node name="ControlGraphIntegral" type="ColorRect" parent="VBoxContainer2/Graphs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+script = ExtResource("1_ig7tw")
+line_color = Color(0, 0.16666651, 1, 1)
+text = "Integral"
+max_val = 10.0
+min_val = -10.0
+metadata/_custom_type_script = "uid://bvf4oxry70fku"
+
+[node name="ControlGraphDeltaError" type="ColorRect" parent="VBoxContainer2/Graphs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+script = ExtResource("1_ig7tw")
+line_color = Color(1, 0, 0.9666667, 1)
+text = "Delta Err"
+max_val = 0.1
+min_val = -0.1
+metadata/_custom_type_script = "uid://bvf4oxry70fku"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 230.0
+offset_bottom = 94.0
+theme_override_constants/margin_left = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Non-pure PID Demo"
+
+[node name="CapLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Output & Integral capped, Integral reset at < %.3f"
+
+[node name="LatencyLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Simulated latency of %.1fs"
+
+[node name="CreditLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "jupiterbjy@gmail.com"
+
+[connection signal="value_changed" from="VBoxContainer2/PanelContainer2/Inputs/DialContainer3/PDial" to="." method="_on_p_dial_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/PanelContainer2/Inputs/DialContainer4/IDial" to="." method="_on_i_dial_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/PanelContainer2/Inputs/DialContainer5/DDial" to="." method="_on_d_dial_value_changed"]

@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://7764mwds22vw"]
+
+[ext_resource type="Script" uid="uid://dqae3fevy5q" path="res://angle_pointer.gd" id="1_p82c6"]
+[ext_resource type="Texture2D" uid="uid://c3qvpvdoc82tt" path="res://resources/angle_pointer.png" id="2_0yswf"]
+[ext_resource type="Texture2D" uid="uid://5f30xwhay4t7" path="res://resources/dial_limits.png" id="2_m1rne"]
+
+[node name="AnglePointer" type="Control"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 400.0
+offset_top = 165.0
+offset_right = 596.0
+offset_bottom = 361.0
+script = ExtResource("1_p82c6")
+
+[node name="LimitIndicators" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+
+[node name="TextureRect" type="TextureRect" parent="LimitIndicators"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_m1rne")
+
+[node name="Knob" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -0.5
+offset_bottom = -0.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -2.3561945
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Knob"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -508.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_0yswf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "0.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
