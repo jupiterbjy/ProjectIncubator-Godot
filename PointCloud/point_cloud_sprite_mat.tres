@@ -6,7 +6,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_xks4g")
-shader_parameter/point_size = 32.0
+shader_parameter/point_size = 64.0
 shader_parameter/sprite = ExtResource("2_p3ugi")
 shader_parameter/brightness_multiplier = 2.5
 shader_parameter/uv_start = Vector2(0.2, 0.25)

@@ -8,7 +8,7 @@ extends Node3D
 @export var point_cloud_scene: PackedScene
 
 
-# --- References ---
+# --- Attributes ---
 
 ## Displays total points
 @onready var point_count_label: Label = %PointStatLabel
@@ -25,7 +25,8 @@ extends Node3D
 @onready var az_axis: Node3D = $AzimuthTurntable
 @onready var el_axis: Node3D = $AzimuthTurntable/ElevationTurntable
 
-@onready var cam: Camera3D = %Camera3D
+@onready var rotation_check_box: CheckBox = %RotationCheckBox
+@onready var pause_check_box: CheckBox = %PauseCheckBox
 
 ## Totall pointcloud mesh count
 var mesh_count: int = 0
@@ -39,17 +40,14 @@ var total_points: int = 0
 ## Current active surface tool
 var surf_tool: SurfaceTool = null
 
+var _pointcloud_instance: MeshInstance3D = null
 
-# --- Init ---
+## Used to half scan rate
+var _tick := true
 
-func _ready() -> void:
-	self.raycast_scene_instance.lidar_cursor = %ScanCursor
+var _accumulated_sec: float = 0
 
-	# add initial pointcloud mesh
-	self.create_new_pointcloud()
-
-
-# --- Utility ---
+# --- Methods ---
 
 ## Add new pointcloud mesh instance and update references.
 ## Originally had mesh seperation on every n points, but removed as there wasn't much perf gain.
@@ -57,11 +55,11 @@ func _ready() -> void:
 func create_new_pointcloud() -> void:
 	print("[Main] Creating new pointcloud!")
 
-	var instance: MeshInstance3D = self.point_cloud_scene.instantiate()
-	self.el_axis.add_child(instance)
+	self._pointcloud_instance = self.point_cloud_scene.instantiate()
+	self.el_axis.add_child(self._pointcloud_instance)
 
 	# update ref
-	self.active_arr_mesh = instance.mesh
+	self.active_arr_mesh = self._pointcloud_instance.mesh
 
 	self.surf_tool = SurfaceTool.new()
 	self.surf_tool.begin(Mesh.PRIMITIVE_POINTS)
@@ -71,21 +69,17 @@ func create_new_pointcloud() -> void:
 	%MeshStatLabel.text = "%s mesh(s)" % self.mesh_count
 
 
-# --- Logic ---
-
-
-
 ## Updates pointcloud array mesh.
 func update_pointcloud():
 
 	for idx: int in range(self.raycast_scene_instance.point_count):
-		surf_tool.set_color(self.raycast_scene_instance.colors[idx])
-		surf_tool.add_vertex(self.raycast_scene_instance.points[idx])
+		self.surf_tool.set_color(self.raycast_scene_instance.colors[idx])
+		self.surf_tool.add_vertex(self.raycast_scene_instance.points[idx])
 
 	# SurfaceTool.commit(existing_arr_mesh) creates new 'surface' every call
 	# so need to recreate from scratch
 	self.active_arr_mesh.clear_surfaces()
-	surf_tool.commit(self.active_arr_mesh)
+	self.surf_tool.commit(self.active_arr_mesh)
 
 	self.total_points += self.raycast_scene_instance.point_count
 	self.raycast_scene_instance.clear_arr()
@@ -106,26 +100,41 @@ func scan_once() -> void:
 	)
 
 
-# --- Driver ---
+# --- Handler ---
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+	self.raycast_scene_instance.lidar_cursor = %ScanCursor
 
-	# rotate object around
-	# unlike cam rotation axis is reversed (honestly unintuitive to me why that is)
-	self.az_axis.rotate_x(delta * -0.2)
-	self.el_axis.rotate_y(delta * -0.1)
+	# add initial pointcloud mesh
+	self.create_new_pointcloud()
+
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 
-var _tick: bool = true
+func _process(_delta: float) -> void:
+	self._accumulated_sec += _delta
+
+	if self.rotation_check_box.button_pressed:
+		# invert az / el because it's inverted from target's POV
+		# (raycast scene's turntable moves cam, this moves object and cam is fixed)
+		self.az_axis.rotation.x = -self.raycast_scene_instance.el_axis.rotation.x
+		self.el_axis.rotation.y = -self.raycast_scene_instance.az_axis.rotation.y
 
 
 # Adjust physic frame per second to adjust scan speed.
 func _physics_process(_delta: float) -> void:
 
-	# scan and call pointcloud later
+	# either scan or update pointcloud
 	if self._tick:
 		self.scan_once()
 	else:
 		self.update_pointcloud()
 
 	self._tick = not self._tick
+
+
+func _on_pause_check_box_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		self.raycast_scene_instance.process_mode = Node.PROCESS_MODE_DISABLED
+	else:
+		self.raycast_scene_instance.process_mode = Node.PROCESS_MODE_INHERIT

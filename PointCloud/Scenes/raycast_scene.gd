@@ -126,9 +126,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 
 	# rotate cam around neko
-	self.az_axis.rotate_y(delta * 0.1)
-	self.el_axis.rotate_x(delta * 0.2)
-
+	self.az_axis.rotate_y(delta * 0.2)
+	self.el_axis.rotate_x(delta * 0.1)
 
 var next_v_pos: int = 0
 
