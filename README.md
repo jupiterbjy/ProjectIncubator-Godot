@@ -32,4 +32,6 @@ Housed projects with readme are below; yt demo vid in each subdir's readme.
 
 ## [Marching Cube](MarchingCube)
 
+![](MarchingCube/marching_cube_demo.webp)
+
 [yt demo](https://youtu.be/C5BxkcOymus)
