@@ -1,7 +1,0 @@
-[gd_resource type="FastNoiseLite" format=3 uid="uid://vxccs1hbjp2n"]
-
-[resource]
-fractal_type = 2
-fractal_weighted_strength = 0.5
-domain_warp_amplitude = 12.31
-metadata/_preview_in_3d_space_ = true
