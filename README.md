@@ -13,9 +13,9 @@ Housed projects with readme are below; yt demo vid in each subdir's readme.
 
 [yt demo](https://youtu.be/ou6bHSG7Um8)
 
-| ![](MarchingCubeChunked/demo_0.webp) | ![](MarchingCubeChunked/demo_1.webp) |
-|--------------------------------------|--------------------------------------|
-| ![](MarchingCubeChunked/demo_2.png)  | ![](MarchingCubeChunked/demo_3.png)  |
+| ![](MarchingCubeChunked/readme_res/demo_0.webp) | ![](MarchingCubeChunked/readme_res/demo_1.webp) |
+|-------------------------------------------------|-------------------------------------------------|
+| ![](MarchingCubeChunked/readme_res/demo_2.png)  | ![](MarchingCubeChunked/readme_res/demo_3.png)  |
 
 <br>
 <br>
@@ -28,7 +28,7 @@ Housed projects with readme are below; yt demo vid in each subdir's readme.
 
 [yt demo cursed](https://youtu.be/eN1zE3QOvts)
 
-![](PointCloud/pointcloud_demo.webp)
+![](PointCloud/readme_res/pointcloud_demo.webp)
 
 <br>
 <br>
@@ -39,7 +39,7 @@ Housed projects with readme are below; yt demo vid in each subdir's readme.
 
 [yt demo](https://youtu.be/-tZ0Dy-3xao)
 
-![](PID/pid_demo.webp)
+![](PID/readme_res/pid_demo.webp)
 
 <br>
 <br>
@@ -48,17 +48,17 @@ Housed projects with readme are below; yt demo vid in each subdir's readme.
 
 [yt demo](https://youtu.be/C5BxkcOymus)
 
-![](MarchingCube/marching_cube_demo.webp)
-
+![](MarchingCube/readme_res/marching_cube_demo.webp)
 
 <br>
 <br>
 
-# Subviewport Popup Demo
+
+## [Subviewport Popup Demo](UI/MaryPopups)
 
 [Live](https://jupiterbjy.github.io/ProjectIncubator-Godot/UI/MaryPopups/build/)
 
 [yt demo](https://youtu.be/viUu_RMGaQQ)
 
-![](UI/MaryPopups/subviewport_popup_demo.webp)
+![](UI/MaryPopups/readme_res/subviewport_popup_demo.webp)
 
