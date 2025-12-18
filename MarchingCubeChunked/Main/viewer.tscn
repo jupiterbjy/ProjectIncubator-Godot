@@ -124,6 +124,24 @@ Cam look: Right click hold
 Add Vol.: Q / =
 Remove Vol.: E / -"
 
+[node name="CreditLabel" type="Label" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -303.0
+offset_top = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_4x6nb")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ohd1f")
+text = "jupiterbjy@gmail.com"
+horizontal_alignment = 2
+vertical_alignment = 2
+
 [node name="MapGenDebug" type="PanelContainer" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 2

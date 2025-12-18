@@ -162,10 +162,10 @@ func _ready() -> void:
 
 	self._method_option_btn.select(len(DensityFuncs.FUNC_TYPE) - 1)
 
-	# generate chunk grids
-	self._manager.generate_chunk(self._get_seed(), self._get_method())
-
+	# generate chunk grids & connect signal, then trigger start
 	self._manager.generation_done.connect(self._on_manager_generation_done)
+	self._manager.generate_chunk(self._get_seed(), self._get_method())
+	self._on_regen_button_pressed.call_deferred()
 
 	# compile pattern ahead
 	#self._digit_pattern.compile("[0-9]*")
