@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1766059569|6273303292';
+const CACHE_VERSION = '1766073230|391577998';
 /** @type {string} */
 const CACHE_PREFIX = 'Marching Cube Ch-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;

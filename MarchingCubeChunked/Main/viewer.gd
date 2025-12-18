@@ -203,3 +203,15 @@ func _notification(what: int) -> void:
 
 func _on_seed_line_edit_text_submitted(_new_text: String) -> void:
 	self._seed_line_edit.release_focus()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+
+	# try to undo focus when there's any meaningful input event
+	if (
+		event is not InputEventMouseButton
+		or not (event as InputEventMouseButton).pressed
+	):
+		return
+
+	self._seed_line_edit.release_focus()
