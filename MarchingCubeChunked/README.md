@@ -1,11 +1,12 @@
 # Chunked & Threaded Marching Cube Generation / Update demo
 
+[Live](https://jupiterbjy.github.io/ProjectIncubator-Godot/MarchingCubeChunked/build/)
+
+[yt demo](https://youtu.be/ou6bHSG7Um8)
+
 | ![](demo_0.webp) | ![](demo_1.webp) |
 |------------------|------------------|
 | ![](demo_2.png)  | ![](demo_3.png)  |
-
-
-[yt demo](https://youtu.be/ou6bHSG7Um8)
 
 Preferrably don't look inside shader, it's kinda terrible and broken.
 
