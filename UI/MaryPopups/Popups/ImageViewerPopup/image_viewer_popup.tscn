@@ -27,6 +27,7 @@ stretch_mode = 5
 [node name="FileNameLabel" type="Label" parent="VBoxContainer/ZeContentGoesHere/HBoxContainer/VBoxContainer" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
+text_overrun_behavior = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ZeContentGoesHere/HBoxContainer" index="1"]
 layout_mode = 2

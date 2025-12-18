@@ -28,3 +28,8 @@ window/stretch/scale=1.5
 folder_colors={
 "res://Popups/": "teal"
 }
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

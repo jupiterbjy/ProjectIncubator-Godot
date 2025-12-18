@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvmtp3tjquj1h"]
+[gd_scene load_steps=8 format=3 uid="uid://bvmtp3tjquj1h"]
 
-[ext_resource type="Script" uid="uid://cjqkypsjllh42" path="res://Scenes/Popups/_Base/popup_base.gd" id="1_0vwhb"]
-[ext_resource type="Texture2D" uid="uid://cw8inxugm6hpv" path="res://Scenes/Popups/_Base/Resources/close_24dp_314D1C_FILL0_wght400_GRAD0_opsz24.svg" id="2_rbcph"]
-[ext_resource type="Texture2D" uid="uid://c2hfxdc5aj85k" path="res://Scenes/Popups/_Base/Resources/close_24dp_EA3323_FILL0_wght400_GRAD0_opsz24.svg" id="3_4t40s"]
+[ext_resource type="Script" uid="uid://cjqkypsjllh42" path="res://Popups/_Base/popup_base.gd" id="1_0vwhb"]
+[ext_resource type="Texture2D" uid="uid://cw8inxugm6hpv" path="res://Popups/_Base/Resources/close_24dp_314D1C_FILL0_wght400_GRAD0_opsz24.svg" id="2_rbcph"]
+[ext_resource type="Texture2D" uid="uid://c2hfxdc5aj85k" path="res://Popups/_Base/Resources/close_24dp_EA3323_FILL0_wght400_GRAD0_opsz24.svg" id="3_4t40s"]
+[ext_resource type="Texture2D" uid="uid://dti8epft3b75e" path="res://Popups/_Base/Resources/corner.png" id="4_4pokd"]
+[ext_resource type="Texture2D" uid="uid://b2ji854b42yra" path="res://Popups/_Base/Resources/corner_hover.png" id="5_pljdl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vwhb"]
 content_margin_left = 8.0
@@ -68,6 +70,7 @@ size_flags_horizontal = 3
 mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0.298039, 0, 1)
 text = "Ze Title goes here!"
+text_overrun_behavior = 3
 
 [node name="CloseButton" type="TextureButton" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -98,6 +101,10 @@ offset_left = -8.0
 offset_top = -8.0
 grow_horizontal = 0
 grow_vertical = 0
+texture_normal = ExtResource("4_4pokd")
+texture_pressed = ExtResource("5_pljdl")
+ignore_texture_size = true
+stretch_mode = 0
 
 [connection signal="gui_input" from="VBoxContainer/PanelContainer/HBoxContainer/TitleLabel" to="." method="_on_title_label_gui_input"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

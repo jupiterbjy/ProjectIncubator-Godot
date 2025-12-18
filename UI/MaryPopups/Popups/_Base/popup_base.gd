@@ -38,12 +38,14 @@ var _is_resize_dragging: bool = false
 
 ## A wrapper function to delay value setting on startup til end of frame.
 func _delayed_title_set(val: String) -> void:
-	self._title_label.text = val
+	if self._title_label:
+		self._title_label.text = val
 
 
 ## A wrapper function to delay value setting on startup til end of frame.
 func _delayed_close_visibility_set(val: bool) -> void:
-	self._close_button.visible = val
+	if self._close_button:
+		self._close_button.visible = val
 
 
 

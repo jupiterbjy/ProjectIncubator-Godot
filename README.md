@@ -18,12 +18,16 @@ Housed projects with readme are below; yt demo vid in each subdir's readme.
 
 ## [Pointcloud](PointCloud)
 
+[Live](https://jupiterbjy.github.io/ProjectIncubator-Godot/PointCloud/build/)
+
 ![](PointCloud/pointcloud_demo.webp)
 
 <br>
 <br>
 
 ## [PID](PID)
+
+[Live](https://jupiterbjy.github.io/ProjectIncubator-Godot/PID/build/)
 
 ![](PID/pid_demo.webp)
 
@@ -35,3 +39,14 @@ Housed projects with readme are below; yt demo vid in each subdir's readme.
 ![](MarchingCube/marching_cube_demo.webp)
 
 [yt demo](https://youtu.be/C5BxkcOymus)
+
+<br>
+<br>
+
+# Subviewport Popup Demo
+
+[Live](https://jupiterbjy.github.io/ProjectIncubator-Godot/UI/MaryPopups/build/)
+
+![](UI/MaryPopups/subviewport_popup_demo.webp)
+
+[YT demo](https://youtu.be/viUu_RMGaQQ)
