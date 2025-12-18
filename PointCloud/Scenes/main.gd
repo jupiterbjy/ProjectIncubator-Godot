@@ -27,6 +27,7 @@ extends Node3D
 
 @onready var rotation_check_box: CheckBox = %RotationCheckBox
 @onready var pause_check_box: CheckBox = %PauseCheckBox
+@onready var points_spin_box: SpinBox = %PointsSpinBox
 
 ## Totall pointcloud mesh count
 var mesh_count: int = 0
@@ -47,6 +48,7 @@ var _tick := true
 
 var _accumulated_sec: float = 0
 
+
 # --- Methods ---
 
 ## Add new pointcloud mesh instance and update references.
@@ -66,7 +68,7 @@ func create_new_pointcloud() -> void:
 
 	# update counter
 	self.mesh_count += 1
-	%MeshStatLabel.text = "%s mesh(s)" % self.mesh_count
+	(%MeshStatLabel as Label).text = "%s mesh(s)" % self.mesh_count
 
 
 ## Updates pointcloud array mesh.
@@ -89,7 +91,7 @@ func update_pointcloud():
 func scan_once() -> void:
 
 	# scan
-	self.raycast_scene_instance.scan_once()
+	self.raycast_scene_instance.scan_once(int(self.points_spin_box.value))
 
 	# update label
 	self.arr_stat_label.text = "%s / %s points in buffer" % [
@@ -108,7 +110,10 @@ func _ready() -> void:
 	# add initial pointcloud mesh
 	self.create_new_pointcloud()
 
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+	# match UI press state
+	self._on_pause_check_box_toggled(self.pause_check_box.button_pressed)
 
 
 func _process(_delta: float) -> void:
@@ -138,3 +143,22 @@ func _on_pause_check_box_toggled(toggled_on: bool) -> void:
 		self.raycast_scene_instance.process_mode = Node.PROCESS_MODE_DISABLED
 	else:
 		self.raycast_scene_instance.process_mode = Node.PROCESS_MODE_INHERIT
+
+
+func _on_points_spin_box_gui_input(event: InputEvent) -> void:
+
+	# since we do want mouse wheel input but not the focus itself..
+
+	if (
+		event is not InputEventMouseButton
+		or (event as InputEventMouseButton).pressed
+	):
+		return
+
+	if (event as InputEventMouseButton).button_index == MOUSE_BUTTON_WHEEL_UP:
+		self.points_spin_box.value += self.points_spin_box.step
+		return
+
+	if (event as InputEventMouseButton).button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		self.points_spin_box.value -= self.points_spin_box.step
+		return

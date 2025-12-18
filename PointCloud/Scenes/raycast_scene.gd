@@ -7,10 +7,6 @@ class_name RaycastScene extends Node3D
 ## Collision type. Use convex for simpler shape, trimesh for complex shape.
 @export_enum("Convex", "Trimesh") var collision_type: int
 
-## Scan points per cursor line. Higher the points, worsen the performance.
-## This is due to screen texture fetch cost. (GPU VRAM -> CPU RAM copy)
-@export var points_per_cursor: int = 30
-
 ## Max array buffer size.
 @export var arr_size: int = 2 ** 10
 
@@ -118,9 +114,9 @@ func _ready() -> void:
 	# generate static collision shape from mesh so we don't have to press in GUI
 	# when changing meshes
 	if self.collision_type == 0:
-		%MeshInstance3D.create_convex_collision()
+		(%MeshInstance3D as MeshInstance3D).create_convex_collision()
 	elif self.collision_type == 1:
-		%MeshInstance3D.create_trimesh_collision()
+		(%MeshInstance3D as MeshInstance3D).create_trimesh_collision()
 
 
 func _process(delta: float) -> void:
@@ -133,11 +129,11 @@ var next_v_pos: int = 0
 
 
 ## Scans at scan cursor position once.
-func scan_once():
+func scan_once(points_per_cursor: int):
 
 	# fetch screen texture here to save GPU-CPU IO
 	var screen_tex: Texture2D = self.viewport.get_texture()
 
 	# scan multiple times per line sweep
-	for idx: int in range(self.points_per_cursor):
-		self.scan_area(idx / float(self.points_per_cursor), screen_tex)
+	for idx: int in range(points_per_cursor):
+		self.scan_area(idx / float(points_per_cursor), screen_tex)

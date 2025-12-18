@@ -8,4 +8,4 @@
 
 Meow! Cat is being scanned
 
-![](pointcloud_demo.webp)
+![](readme_res/pointcloud_demo.webp)
