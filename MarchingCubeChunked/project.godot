@@ -119,7 +119,7 @@ common/max_physics_steps_per_frame=10
 
 [rendering]
 
-anti_aliasing/quality/msaa_2d=1
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 anti_aliasing/screen_space_roughness_limiter/enabled=false
-anti_aliasing/quality/screen_space_aa=1
 textures/quality/msaa_2d=0

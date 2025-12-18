@@ -156,11 +156,11 @@ func _get_method() -> StringName:
 func _ready() -> void:
 	self._thread_spinbox.value = self._manager.max_threads
 
-	# popuplate option button & select first
+	# popuplate option button & select last
 	for method: StringName in DensityFuncs.FUNC_TYPE:
 		self._method_option_btn.add_item(method)
 
-	self._method_option_btn.select(0)
+	self._method_option_btn.select(len(DensityFuncs.FUNC_TYPE) - 1)
 
 	# generate chunk grids
 	self._manager.generate_chunk(self._get_seed(), self._get_method())
