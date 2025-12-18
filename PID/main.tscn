@@ -70,6 +70,7 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
+button_pressed = true
 texture_normal = ExtResource("2_1bvp3")
 texture_pressed = ExtResource("3_lquwl")
 
@@ -96,6 +97,7 @@ vertical_alignment = 1
 [node name="InputDial" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer" instance=ExtResource("6_5vw27")]
 unique_name_in_owner = true
 layout_mode = 2
+value = 0.7
 
 [node name="Control" type="Control" parent="VBoxContainer2/PanelContainer2/Inputs"]
 layout_mode = 2
