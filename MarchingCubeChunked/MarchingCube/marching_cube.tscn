@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ch4idvk0b0b5o"]
+[gd_scene load_steps=11 format=3 uid="uid://ch4idvk0b0b5o"]
 
 [ext_resource type="Script" uid="uid://cbd0p3hv1ophx" path="res://MarchingCube/marching_cube.gd" id="1_wl5se"]
 [ext_resource type="FastNoiseLite" uid="uid://vxccs1hbjp2n" path="res://MarchingCube/noise_3d.tres" id="2_87okm"]
@@ -6,12 +6,17 @@
 [ext_resource type="Material" uid="uid://dqe0p85g14q26" path="res://MarchingCube/Shader/wireframe_mat.tres" id="4_ldsnm"]
 [ext_resource type="ArrayMesh" uid="uid://wrbpggrdpi2c" path="res://MarchingCube/cube_basic.mesh" id="5_lau83"]
 [ext_resource type="Shader" uid="uid://dohvahkqnybfk" path="res://MarchingCube/Shader/chunk_debug.gdshader" id="6_2kqob"]
+[ext_resource type="Shader" uid="uid://d2skf46jt3fnt" path="res://MarchingCube/Shader/chunk_debug_processing.gdshader" id="7_gl2an"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_u88h3"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxetl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uevmm"]
 render_priority = 0
 shader = ExtResource("6_2kqob")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_din5r"]
+render_priority = 0
+shader = ExtResource("7_gl2an")
 
 [node name="MarchingCube" type="Node3D" groups=["CHUNKS"]]
 script = ExtResource("1_wl5se")
@@ -29,9 +34,15 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 
-[node name="DebugChunkArea" type="MeshInstance3D" parent="." groups=["DEBUG"]]
+[node name="DebugMeshIdle" type="MeshInstance3D" parent="." groups=["DEBUG"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0.5, 0.5)
 cast_shadow = 0
-instance_shader_parameters/is_generating = false
 mesh = ExtResource("5_lau83")
-surface_material_override/0 = SubResource("ShaderMaterial_wxetl")
+surface_material_override/0 = SubResource("ShaderMaterial_uevmm")
+
+[node name="DebugMeshProcessing" type="MeshInstance3D" parent="." groups=["DEBUG"]]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0.5, 0.5)
+visible = false
+cast_shadow = 0
+mesh = ExtResource("5_lau83")
+surface_material_override/0 = SubResource("ShaderMaterial_din5r")

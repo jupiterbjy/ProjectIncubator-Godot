@@ -40,7 +40,8 @@ static var width: int = 16
 @onready var _sq_w_verts: int = self._w_verts ** 2
 
 ## Cache wireframe mesh for debugging
-@onready var debug_area_boundary: MeshInstance3D = $DebugChunkArea
+@onready var _debug_mesh_idle: MeshInstance3D = $DebugMeshIdle
+@onready var _debug_mesh_processing: MeshInstance3D = $DebugMeshProcessing
 
 ## Just copy of self.position but is not property, so thread can use it.
 ## Set this externally
@@ -209,12 +210,14 @@ func _interpolate(iso_level: float, vert_a: Vector3i, vert_b: Vector3i) -> Vecto
 ## enable generating flag + safeguard to make sure one chunk is processed by one thread only
 func debug_set_generating() -> void:
 	self.generation_mutex.lock()
-	self.debug_area_boundary.set_instance_shader_parameter("is_generating", true)
+	self._debug_mesh_idle.hide()
+	self._debug_mesh_processing.show()
 
 
 ## disable generating flag
 func debug_unset_generating() -> void:
-	self.debug_area_boundary.set_instance_shader_parameter("is_generating", false)
+	self._debug_mesh_processing.hide()
+	self._debug_mesh_idle.show()
 	self.generation_mutex.unlock()
 
 
