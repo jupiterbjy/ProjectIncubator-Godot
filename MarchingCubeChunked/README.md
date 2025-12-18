@@ -1,8 +1,8 @@
 # Chunked & Threaded Marching Cube Generation / Update demo
 
-| ![](_demo_0.webp) | ![](_demo_1.webp) |
-|-------------------|-------------------|
-| ![](_demo_2.png)  | ![](_demo_3.png)  |
+| ![](demo_0.webp) | ![](demo_1.webp) |
+|------------------|------------------|
+| ![](demo_2.png)  | ![](demo_3.png)  |
 
 
 [yt demo](https://youtu.be/ou6bHSG7Um8)

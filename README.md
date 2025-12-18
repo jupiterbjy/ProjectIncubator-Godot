@@ -9,9 +9,9 @@ Housed projects with readme are below; yt demo vid in each subdir's readme.
 
 ## [Marching Cube Chunked / Threaded](MarchingCubeChunked)
 
-| ![](MarchingCubeChunked/_demo_0.webp) | ![](MarchingCubeChunked/_demo_1.webp) |
-|---------------------------------------|---------------------------------------|
-| ![](MarchingCubeChunked/_demo_2.png)  | ![](MarchingCubeChunked/_demo_3.png)  |
+| ![](MarchingCubeChunked/demo_0.webp) | ![](MarchingCubeChunked/demo_1.webp) |
+|--------------------------------------|--------------------------------------|
+| ![](MarchingCubeChunked/demo_2.png)  | ![](MarchingCubeChunked/demo_3.png)  |
 
 <br>
 <br>
