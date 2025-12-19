@@ -142,6 +142,8 @@ func clear_pending() -> void:
 	self.mutex.unlock()
 
 
+# --- Methods ---
+
 ## Thread safe runner for mesh generation.
 ## Send null in array and post semaphore to terminate gracefully.
 func _generate_mesh_threaded(thread_idx: int) -> void:
@@ -183,7 +185,7 @@ func _generate_mesh_threaded(thread_idx: int) -> void:
 
 ## Only generate chunks. Set chunk amount at `chunk_dimensions` export beforehand.
 ## Does not sample & create mesh. Call `regenerate_all` instead.
-func generate_chunk(seed_: int, method: StringName, frequency: float = 0.1) -> void:
+func generate_chunk(seed_: int, method: StringName, smoothness: float, frequency: float = 0.1) -> void:
 
 	print("[ChunkManager] Generation requested")
 
@@ -210,11 +212,11 @@ func generate_chunk(seed_: int, method: StringName, frequency: float = 0.1) -> v
 
 
 ## Generate/Regenerate all chunks. Create chunk nodes automatically when nonexisting.
-func regenerate_all(seed_: int, method: StringName, frequency: float = 0.1) -> void:
+func regenerate_all(seed_: int, method: StringName, smoothness: float, frequency: float = 0.1) -> void:
 
 	# check if not generated, if so generate
 	if self._lookup_table.is_empty():
-		self.generate_chunk(seed_, method, frequency)
+		self.generate_chunk(seed_, method, smoothness, frequency)
 
 	print("[ChunkManager] Regenerate requested w/ seed: %d | method: %s" % [seed_, method])
 
@@ -226,6 +228,7 @@ func regenerate_all(seed_: int, method: StringName, frequency: float = 0.1) -> v
 		chunk.set_noise_seed(seed_, false)
 		chunk.set_noise_frequency(frequency, false)
 		chunk.sampler = method
+		chunk.smoothness = smoothness
 
 		# clear mesh & add to queue
 		chunk.clear_mesh()

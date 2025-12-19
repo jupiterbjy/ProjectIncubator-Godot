@@ -23,6 +23,7 @@ extends Node3D
 
 @onready var _thread_spinbox: SpinBox = %ThreadSpinbox
 @onready var _seed_line_edit: LineEdit = %SeedLineEdit
+@onready var _smooth_slider: HSlider = %SmoothSlider
 @onready var _method_option_btn: OptionButton = %MethodOptionButton
 
 @onready var _min_point_dist_sq: float = self.min_point_distance_for_update ** 2
@@ -151,6 +152,10 @@ func _get_method() -> StringName:
 	return self._method_option_btn.get_item_text(self._method_option_btn.selected)
 
 
+func _get_smoothness() -> float:
+	return self._smooth_slider.value
+
+
 # --- Handlers ---
 
 func _ready() -> void:
@@ -164,7 +169,7 @@ func _ready() -> void:
 
 	# generate chunk grids & connect signal, then trigger start
 	self._manager.generation_done.connect(self._on_manager_generation_done)
-	self._manager.generate_chunk(self._get_seed(), self._get_method())
+	self._manager.generate_chunk(self._get_seed(), self._get_method(), self._get_smoothness())
 	self._on_regen_button_pressed.call_deferred()
 
 	# compile pattern ahead
@@ -180,7 +185,7 @@ func _on_regen_button_pressed() -> void:
 	if self._manager.max_threads != threads:
 		self._manager.set_thread_count(threads)
 
-	self._manager.regenerate_all(self._get_seed(), self._get_method())
+	self._manager.regenerate_all(self._get_seed(), self._get_method(), self._get_smoothness())
 
 
 func _on_manager_generation_done(elapsed_sec: float) -> void:
