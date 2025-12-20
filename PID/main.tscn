@@ -58,7 +58,7 @@ alignment = 1
 [node name="Label2" type="Label" parent="VBoxContainer2/PanelContainer2/Inputs/SwitchContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "SET"
+text = "ON"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -70,7 +70,6 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
-button_pressed = true
 button_mask = 3
 texture_normal = ExtResource("2_1bvp3")
 texture_pressed = ExtResource("3_lquwl")
@@ -78,7 +77,7 @@ texture_pressed = ExtResource("3_lquwl")
 [node name="Label" type="Label" parent="VBoxContainer2/PanelContainer2/Inputs/SwitchContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "UNSET"
+text = "OFF"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -135,8 +134,8 @@ vertical_alignment = 1
 [node name="PDial" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer3" instance=ExtResource("6_5vw27")]
 unique_name_in_owner = true
 layout_mode = 2
-max_val = 9.0
-value = 9.0
+max_val = 7.0
+value = 7.0
 
 [node name="DialContainer4" type="VBoxContainer" parent="VBoxContainer2/PanelContainer2/Inputs"]
 layout_mode = 2
@@ -151,8 +150,8 @@ vertical_alignment = 1
 [node name="IDial" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer4" instance=ExtResource("6_5vw27")]
 unique_name_in_owner = true
 layout_mode = 2
-max_val = 9.0
-value = 0.75
+max_val = 7.0
+value = 0.9
 
 [node name="DialContainer5" type="VBoxContainer" parent="VBoxContainer2/PanelContainer2/Inputs"]
 layout_mode = 2
@@ -167,8 +166,8 @@ vertical_alignment = 1
 [node name="DDial" parent="VBoxContainer2/PanelContainer2/Inputs/DialContainer5" instance=ExtResource("6_5vw27")]
 unique_name_in_owner = true
 layout_mode = 2
-max_val = 9.0
-value = 1.4
+max_val = 7.0
+value = 1.1
 
 [node name="Graphs" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2

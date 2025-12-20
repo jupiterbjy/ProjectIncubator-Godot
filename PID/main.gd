@@ -15,10 +15,9 @@ class PIDManager:
 	var last_err: float = 0
 	var integral: float = 0
 
-	var integral_max: float = 20
+	var integral_max: float = 10
 	var pid_max: float = 20
-	var integral_min_err: float = 0.01
-	var integral_cutoff: float = 0.025
+	var integral_cutoff: float = 0.05
 
 	## Calculate PID controller output from given error.
 	func calc(err: float, delta: float) -> float:
@@ -76,7 +75,7 @@ func _ready() -> void:
 
 	# update labels for constant-ish-values
 	self.latency_label.text = self.latency_label.text % self.pointer.delay_sec
-	self.cap_label.text = self.cap_label.text % self.pid_manager.integral_min_err
+	self.cap_label.text = self.cap_label.text % self.pid_manager.integral_cutoff
 
 	# recording res mode
 	#self.get_window().size *= 2.0
