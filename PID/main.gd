@@ -18,7 +18,7 @@ class PIDManager:
 	var integral_max: float = 20
 	var pid_max: float = 20
 	var integral_min_err: float = 0.01
-	var integral_cutoff: float = 0.005
+	var integral_cutoff: float = 0.025
 
 	## Calculate PID controller output from given error.
 	func calc(err: float, delta: float) -> float:
@@ -29,7 +29,7 @@ class PIDManager:
 		# limit maximum integral
 		self.integral = clampf(self.integral + err, -self.integral_max, self.integral_max)
 
-		# steady error cutoff
+		# integral cutoff to prevent oscillation
 		if absf(err) < self.integral_cutoff:
 			self.integral = 0.
 

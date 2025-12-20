@@ -71,6 +71,7 @@ layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 button_pressed = true
+button_mask = 3
 texture_normal = ExtResource("2_1bvp3")
 texture_pressed = ExtResource("3_lquwl")
 
