@@ -38,11 +38,11 @@ func apply_torque(torque: float) -> void:
 
 func _ready() -> void:
 	# gonna set 0.1 sec delay
-	var project_fps: int = ProjectSettings.get_setting("application/run/max_fps")
+	var project_fps: int = ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
 	self._force_delay_arr.resize(ceili(float(project_fps) * self.delay_sec))
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 
 	# apply delayed torque
 	self._moment -= self._force_delay_arr[self._read_idx] * delta

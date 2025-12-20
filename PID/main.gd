@@ -82,7 +82,7 @@ func _ready() -> void:
 	#self.get_window().move_to_center()
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 
 	var factor: float = 1.0
 	var delta_err: float = 0.0
