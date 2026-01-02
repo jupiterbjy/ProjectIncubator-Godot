@@ -9,7 +9,7 @@ Housed projects with readme are below; yt demo vid in each subdir's readme.
 
 ## [Marching Cube Chunked / Threaded](MarchingCubeChunked)
 
-[Live](https://jupiterbjy.github.io/ProjectIncubator-Godot/MarchingCubeChunked/build/)
+[Live](https://jupiterbjy.github.io/ProjectIncubator-Godot/MarchingCubeChunked/build/) (you MUST refresh page AFTER OPENING)
 
 [yt demo](https://youtu.be/ou6bHSG7Um8)
 

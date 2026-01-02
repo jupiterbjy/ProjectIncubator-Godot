@@ -1,6 +1,6 @@
 # Chunked & Threaded Marching Cube Generation / Update demo
 
-[Live](https://jupiterbjy.github.io/ProjectIncubator-Godot/MarchingCubeChunked/build/)
+[Live](https://jupiterbjy.github.io/ProjectIncubator-Godot/MarchingCubeChunked/build/) (you MUST refresh page AFTER OPENING)
 
 [yt demo](https://youtu.be/ou6bHSG7Um8)
 
